@@ -21,7 +21,7 @@ try:
     while True:
         print(f'{cor_titulo}╔══════════════════════════════════════════════════════════╗')
         print(f'║                                                          ║')
-        print(f'║ 🏥 Sistema de Informação de Gerenciamento Hospitalar 🏥  ║')
+        print(f'║ 🏥 Sistema 
         print(f'║                                            v1.0.0        ║')
         print(f'║                                                          ║')
         print(f'╚══════════════════════════════════════════════════════════╝{Style.RESET_ALL}\n')
@@ -54,30 +54,23 @@ try:
 
         match opcao:
             case '1':
-                from controller.gestao_de_leito_controller import run
-                run()
+                #run()
             case '2':
-                from controller.controle_equipamento_controller import run
-                run()
+                #run()
             case '3':
-                from controller.administracao_de_medicamentos_controller import run
-                run()
+                #run()
             case '4':
-                from controller.agendamento_controle_de_visitas_controlelr import run
-                run()
+                #run()
             case '5':
-                from controller.cadastro_paciente_controller import run 
-                run() 
+                #run() 
             case '6':
-                from controller.gestao_equipe_controller import run
-                run()
+                #run()
             case '7':
-                from controller.agendamento_controle_de_visitas_controlelr import run
+                #run()
             case '8':
-                from controller.relatorios_analises_controller import run
-                run()
+               #run()
             case '9':
-                print(f'{cor_mensagem}👋 Obrigado por utilizar o Sistema de Informação de Gerenciamento Hospitalar{Style.RESET_ALL}\n')
+                print(f'{cor_mensagem}👋 Obrigado por utilizar o Sistema{Style.RESET_ALL}\n')
                 break
             case _:
                 print(f'{cor_mensagem_erro}❌ Ocorreu um erro estranho{Style.RESET_ALL}\n')

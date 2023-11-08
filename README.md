@@ -1,1 +1,7 @@
-# Estudo_de_Caso_03
+# Integrantes:
+
+- Rafael Santana
+- Vitor Gabriel
+- Otton
+- Tiago Manoel
+- Carlos

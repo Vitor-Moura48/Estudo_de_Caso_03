@@ -1,7 +1,7 @@
 import os
 import pandas
 
-class Cliente():
+class Cliente:
     def __init__(self):
         self.caminho_registro_doacoes = "database/doacoes.csv"
 
@@ -19,7 +19,7 @@ class Cliente():
         doacao = pandas.DataFrame({'nome': [nome], 'descricao': [descricao], 'condicao': [condicao]})
 
         if arquivo_doacao.empty:
-            doacao.to_csv(self.caminho_registro_doacoes, index=False, mode='at')
+            doacao.to_csv(self.caminho_registro_doacoes, index=False, mode='a')
         else:
             doacao.to_csv(self.caminho_registro_doacoes, index=False, mode='a', header=False)
     

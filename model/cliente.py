@@ -9,7 +9,6 @@ class Cliente:
             arquivo = pandas.DataFrame()
             arquivo.to_csv(self.caminho_registro_doacoes, index=False)
 
-
     def doar_item(self, nome, descricao, condicao):
         try:
             arquivo_doacao = pandas.read_csv(self.caminho_registro_doacoes)

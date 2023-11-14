@@ -21,7 +21,7 @@ try:
     while True:
         print(f'{cor_titulo}╔══════════════════════════════════════════════════════════╗')
         print(f'║                                                          ║')
-        print(f'║ 🏥 Sistema '
+        print(f'║ 🏥 Sistema ')
         print(f'║                                            v1.0.0        ║')
         print(f'║                                                          ║')
         print(f'╚══════════════════════════════════════════════════════════╝{Style.RESET_ALL}\n')
@@ -55,20 +55,28 @@ try:
         match opcao:
             case '1':
                 #run()
+                pass
             case '2':
                 #run()
+                pass
             case '3':
                 #run()
+                pass
             case '4':
                 #run()
+                pass
             case '5':
-                #run() 
+                #run()
+                pass
             case '6':
                 #run()
+                pass
             case '7':
                 #run()
+                pass
             case '8':
                #run()
+               pass
             case '9':
                 print(f'{cor_mensagem}👋 Obrigado por utilizar o Sistema{Style.RESET_ALL}\n')
                 break

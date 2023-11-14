@@ -44,4 +44,6 @@ class CadastroItens:
         
 
 mai = CadastroItens()
-mai.cadastrar('Nome',45,50.00,'balba','Bom')
+mai.cadastrar('Oculos',1,2400,'um bom oculos','Bom')
+mai.cadastrar('Bola',1,500,'bola de ouro','Excelente')
+mai.cadastrar('Lapis',2,50,'muito bom','Ruim')

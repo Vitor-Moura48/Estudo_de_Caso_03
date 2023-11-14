@@ -34,7 +34,7 @@ class AvaliacaoItens:
                     dados = [item[0], item[1], item[2], item[3], item[5], pontuacao, aprovacao]
 
                     if aprovacao == 'Aprovado':
-                        # Abre o arquivo apenas para adicionar dados dentro do loop
+                       
                         with open(arquivo_avaliacao, 'a', newline='') as arquivo_csv_avaliacao:
                             escritor_csv = csv.writer(arquivo_csv_avaliacao, delimiter=';')
                             escritor_csv.writerow(dados)

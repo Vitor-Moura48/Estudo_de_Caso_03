@@ -20,7 +20,7 @@ class AvaliacaoItens:
         with open('database/itens_para_avaliar.csv', 'r') as arquivo_csv:
             leitor = csv.reader(arquivo_csv, delimiter=';')
             cabecalho = next(leitor)
-
+            
             itens_para_avaliar = []
             for item in leitor:
                 if len(item) >= 6:
@@ -28,11 +28,11 @@ class AvaliacaoItens:
                     itens_para_avaliar.append(item)
 
             opcao = input('Qual item deseja escolher: ')
-
+                     
             for item in itens_para_avaliar:
-                if len(item) >= 6 and opcao == item[0]:
+                if len(item) >= 6 and opcao == item[1]:
                     pontuacao = int(input('-Digite a pontuação de créditos-\nCritérios:\nFaixa de valor | Condição\n0R$-50R$ = 2 pontos | Ruim = Não aprovado\n50R$-100R$ = 4 pontos | Mediano = 5\n100R$-500R$ = 6 pontos | Bom = 10 pontos\n500R$-1000+ = 8 pontos | Excelente = 15 pontos\nR:'))
-                    aprovacao = input("Aprovado ou não, com justificativa:\n")
+                    aprovacao = input("Aprovado ou não: \n")
 
                     dados = [item[0], item[1], item[2], item[3], item[5], pontuacao, aprovacao]
                     
@@ -40,6 +40,7 @@ class AvaliacaoItens:
                         with open(arquivo_avaliacao, 'a', newline='') as arquivo_csv_avaliacao:
                             escritor_csv = csv.writer(arquivo_csv_avaliacao, delimiter=';')
                             escritor_csv.writerow(dados)
+                            continue
                     else:
                         continue
 

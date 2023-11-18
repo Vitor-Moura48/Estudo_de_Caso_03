@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container mx-auto flex min-h-full min-w-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div class="text-center">
+      <h1 class="text-2xl font-bold text-[#D90479]">Bem vindo ao SIGH</h1>
+      <h2 class="text-xl text-gray-900 mt-2">Selecione o modulo que deseja acessar</h2>
+    </div>
+    <div class="mx-auto px-4 sm:px-6 lg:px-8 max-w-[90rem]">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
+        <div onclick="window.location.replace('gestao_leitos')" class="bg-gray-100 p-4 rounded-lg flex flex-row justify-start items-center border border-gray-300 hover:border-[#D90479] cursor-pointer transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+          <div class="mr-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#D90479]" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.477 0 10c0 5.523 4.477 10 10 10s10-4.477 10-10c0-5.523-4.477-10-10-10zm0 18.75c-4.556 0-8.25-3.694-8.25-8.25S5.444 2.25 10 2.25s8.25 3.694 8.25 8.25-3.694 8.25-8.25 8.25z" clip-rule="evenodd" />
+              <path fill-rule="evenodd" d="M10 5.625a1.875 1.875 0 100-3.75 1.875 1.875 0 000 3.75zm0 2.813c-.782 0-1.406-.624-1.406-1.406v-1.406c0-.782.624-1.406 1.406-1.406s1.406.624 1.406 1.406v1.406c0 .782-.624 1.406-1.406 1.406zm0 5.625c-.782 0-1.406-.624-1.406-1.406v-2.813c0-.782.624-1.406 1.406-1.406s1.406.624 1.406 1.406v2.813c0 .782-.624 1.406-1.406 1.406z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="flex flex-col justify-start">
+            <h3 class="text-lg font-medium">Gestão de Leito</h3>
+            <p class="text-sm">Módulo de gestão de leitos</p>
+          </div>
+        </div>
+        <div class="bg-gray-100 p-4 rounded-lg flex flex-row justify-start items-center border border-gray-300 hover:border-[#D90479] cursor-pointer transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+          <div class="mr-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#D90479]" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.477 0 10c0 5.523 4.477 10 10 10s10-4.477 10-10c0-5.523-4.477-10-10-10zm0 18.75c-4.556 0-8.25-3.694-8.25-8.25S5.444 2.25 10 2.25s8.25 3.694 8.25 8.25-3.694 8.25-8.25 8.25z" clip-rule="evenodd" />
+              <path fill-rule="evenodd" d="M10 5.625a1.875 1.875 0 100-3.75 1.875 1.875 0 000 3.75zm0 2.813c-.782 0-1.406-.624-1.406-1.406v-1.406c0-.782.624-1.406 1.406-1.406s1.406.624 1.406 1.406v1.406c0 .782-.624 1.406-1.406 1.406zm0 5.625c-.782 0-1.406-.624-1.406-1.406v-2.813c0-.782.624-1.406 1.406-1.406s1.406.624 1.406 1.406v2.813c0 .782-.624 1.406-1.406 1.406z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="flex flex-col justify-start">
+            <h3 class="text-lg font-medium">Controle de Equipamento</h3>
+            <p class="text-sm">Módulo de controle de equipamentos</p>
+          </div>
+        </div>
+        <div class="bg-gray-100 p-4 rounded-lg flex flex-row justify-start items-center border border-gray-300 hover:border-[#D90479] cursor-pointer transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+          <div class="mr-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#D90479]" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.477 0 10c0 5.523 4.477 10 10 10s10-4.477 10-10c0-5.523-4.477-10-10-10zm0 18.75c-4.556 0-8.25-3.694-8.25-8.25S5.444 2.25 10 2.25s8.25 3.694 8.25 8.25-3.694 8.25-8.25 8.25z" clip-rule="evenodd" />
+              <path fill-rule="evenodd" d="M10 5.625a1.875 1.875 0 100-3.75 1.875 1.875 0 000 3.75zm0 2.813c-.782 0-1.406-.624-1.406-1.406v-1.406c0-.782.624-1.406 1.406-1.406s1.406.624 1.406 1.406v1.406c0 .782-.624 1.406-1.406 1.406zm0 5.625c-.782 0-1.406-.624-1.406-1.406v-2.813c0-.782.624-1.406 1.406-1.406s1.406.624 1.406 1.406v2.813c0 .782-.624 1.406-1.406 1.406z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="flex flex-col justify-start">
+            <h3 class="text-lg font-medium">Administração de Medicamentos</h3>
+            <p class="text-sm">Módulo de administração de medicamentos</p>
+          </div>
+        </div>
+        <div class="bg-gray-100 p-4 rounded-lg flex flex-row justify-start items-center border border-gray-300 hover:border-[#D90479] cursor-pointer transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+          <div class="mr-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#D90479]" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.477 0 10c0 5.523 4.477 10 10 10s10-4.477 10-10c0-5.523-4.477-10-10-10zm0 18.75c-4.556 0-8.25-3.694-8.25-8.25S5.444 2.25 10 2.25s8.25 3.694 8.25 8.25-3.694 8.25-8.25 8.25z" clip-rule="evenodd" />
+              <path fill-rule="evenodd" d="M10 5.625a1.875 1.875 0 100-3.75 1.875 1.875 0 000 3.75zm0 2.813c-.782 0-1.406-.624-1.406-1.406v-1.406c0-.782.624-1.406 1.406-1.406s1.406.624 1.406 1.406v1.406c0 .782-.624 1.406-1.406 1.406zm0 5.625c-.782 0-1.406-.624-1.406-1.406v-2.813c0-.782.624-1.406 1.406-1.406s1.406.624 1.406 1.406v2.813c0 .782-.624 1.406-1.406 1.406z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="flex flex-col justify-start">
+            <h3 class="text-lg font-medium">Agendamento e Controle de Visitas</h3>
+            <p class="text-sm">Módulo de agendamento e controle de visitas</p>
+          </div>
+        </div>
+        <div class="bg-gray-100 p-4 rounded-lg flex flex-row justify-start items-center border border-gray-300 hover:border-[#D90479] cursor-pointer transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+          <div class="mr-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#D90479]" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.477 0 10c0 5.523 4.477 10 10 10s10-4.477 10-10c0-5.523-4.477-10-10-10zm0 18.75c-4.556 0-8.25-3.694-8.25-8.25S5.444 2.25 10 2.25s8.25 3.694 8.25 8.25-3.694 8.25-8.25 8.25z" clip-rule="evenodd" />
+              <path fill-rule="evenodd" d="M10 5.625a1.875 1.875 0 100-3.75 1.875 1.875 0 000 3.75zm0 2.813c-.782 0-1.406-.624-1.406-1.406v-1.406c0-.782.624-1.406 1.406-1.406s1.406.624 1.406 1.406v1.406c0 .782-.624 1.406-1.406 1.406zm0 5.625c-.782 0-1.406-.624-1.406-1.406v-2.813c0-.782.624-1.406 1.406-1.406s1.406.624 1.406 1.406v2.813c0 .782-.624 1.406-1.406 1.406z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="flex flex-col justify-start">
+            <h3 class="text-lg font-medium">Prontuário Eletrônico</h3>
+            <p class="text-sm">Módulo de prontuário eletrônico</p>
+          </div>
+        </div>
+        <div class="bg-gray-100 p-4 rounded-lg flex flex-row justify-start items-center border border-gray-300 hover:border-[#D90479] cursor-pointer transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+          <div class="mr-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#D90479]" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.477 0 10c0 5.523 4.477 10 10 10s10-4.477 10-10c0-5.523-4.477-10-10-10zm0 18.75c-4.556 0-8.25-3.694-8.25-8.25S5.444 2.25 10 2.25s8.25 3.694 8.25 8.25-3.694 8.25-8.25 8.25z" clip-rule="evenodd" />
+              <path fill-rule="evenodd" d="M10 5.625a1.875 1.875 0 100-3.75 1.875 1.875 0 000 3.75zm0 2.813c-.782 0-1.406-.624-1.406-1.406v-1.406c0-.782.624-1.406 1.406-1.406s1.406.624 1.406 1.406v1.406c0 .782-.624 1.406-1.406 1.406zm0 5.625c-.782 0-1.406-.624-1.406-1.406v-2.813c0-.782.624-1.406 1.406-1.406s1.406.624 1.406 1.406v2.813c0 .782-.624 1.406-1.406 1.406z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="flex flex-col justify-start">
+            <h3 class="text-lg font-medium">Gestão de Equipes</h3>
+            <p class="text-sm">Módulo de gestão de equipes</p>
+          </div>
+        </div>
+        <div class="bg-gray-100 p-4 rounded-lg flex flex-row justify-start items-center border border-gray-300 hover:border-[#D90479] cursor-pointer transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+          <div class="mr-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#D90479]" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.477 0 10c0 5.523 4.477 10 10 10s10-4.477 10-10c0-5.523-4.477-10-10-10zm0 18.75c-4.556 0-8.25-3.694-8.25-8.25S5.444 2.25 10 2.25s8.25 3.694 8.25 8.25-3.694 8.25-8.25 8.25z" clip-rule="evenodd" />
+              <path fill-rule="evenodd" d="M10 5.625a1.875 1.875 0 100-3.75 1.875 1.875 0 000 3.75zm0 2.813c-.782 0-1.406-.624-1.406-1.406v-1.406c0-.782.624-1.406 1.406-1.406s1.406.624 1.406 1.406v1.406c0 .782-.624 1.406-1.406 1.406zm0 5.625c-.782 0-1.406-.624-1.406-1.406v-2.813c0-.782.624-1.406 1.406-1.406s1.406.624 1.406 1.406v2.813c0 .782-.624 1.406-1.406 1.406z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="flex flex-col justify-start">
+            <h3 class="text-lg font-medium">Cadastro de Visitantes</h3>
+            <p class="text-sm">Módulo de cadastro de visitantes</p>
+          </div>
+        </div>
+        <div class="bg-gray-100 p-4 rounded-lg flex flex-row justify-start items-center border border-gray-300 hover:border-[#D90479] cursor-pointer transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+          <div class="mr-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#D90479]" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.477 0 10c0 5.523 4.477 10 10 10s10-4.477 10-10c0-5.523-4.477-10-10-10zm0 18.75c-4.556 0-8.25-3.694-8.25-8.25S5.444 2.25 10 2.25s8.25 3.694 8.25 8.25-3.694 8.25-8.25 8.25z" clip-rule="evenodd" />
+              <path fill-rule="evenodd" d="M10 5.625a1.875 1.875 0 100-3.75 1.875 1.875 0 000 3.75zm0 2.813c-.782 0-1.406-.624-1.406-1.406v-1.406c0-.782.624-1.406 1.406-1.406s1.406.624 1.406 1.406v1.406c0 .782-.624 1.406-1.406 1.406zm0 5.625c-.782 0-1.406-.624-1.406-1.406v-2.813c0-.782.624-1.406 1.406-1.406s1.406.624 1.406 1.406v2.813c0 .782-.624 1.406-1.406 1.406z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="flex flex-col justify-start">
+            <h3 class="text-lg font-medium">Relátorios e Análises</h3>
+            <p class="text-sm">Módulo de relátorios e análises</p>
+          </div>
+        </div>
+        <div id="logout" class="bg-gray-100 p-4 rounded-lg flex flex-row justify-start items-center border border-gray-300 hover:border-red-500 cursor-pointer transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+          <div class="mr-4">
+            <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17 9H7.5M15 12L18 9L15 6M10 4V3C10 2.46957 9.78929 1.96086 9.41421 1.58579C9.03914 1.21071 8.53043 1 8 1H3C2.46957 1 1.96086 1.21071 1.58579 1.58579C1.21071 1.96086 1 2.46957 1 3V15C1 15.5304 1.21071 16.0391 1.58579 16.4142C1.96086 16.7893 2.46957 17 3 17H8C8.53043 17 9.03914 16.7893 9.41421 16.4142C9.78929 16.0391 10 15.5304 10 15V14" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="flex flex-col justify-start">
+            <h3 class="text-lg font-medium">Encerrar Sessão</h3>
+            <p class="text-sm">Clique aqui para sair do sistema</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const logout = document.getElementById('logout');
+    logout.addEventListener('click', () => {
+      window.location.replace("{{ url_for('login') }}");
+    });
+  </script>
+{% endblock %}

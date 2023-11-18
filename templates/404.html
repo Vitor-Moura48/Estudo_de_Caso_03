@@ -1,0 +1,17 @@
+<!-- FILEPATH: /c:/Users/tiago/Documents/Faculdade/Suricato/templates/404.html -->
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="flex flex-col items-center justify-center h-screen bg-gray-100">
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">Erro 404</h1>
+        <p class="text-lg text-gray-600 mb-8">Desculpe, a página que você está procurando não foi encontrada.</p>
+        <a id="back" class="bg-[#D90479] hover:bg-[#b00061] text-white font-bold py-2 px-4 rounded">Voltar para a página inicial</a>
+    </div>
+
+    <script>
+        const back = document.getElementById('back');
+        back.addEventListener('click', () => {
+            window.location.replace("{{ url_for('index') }}");
+        });
+    </script>
+{% endblock %}

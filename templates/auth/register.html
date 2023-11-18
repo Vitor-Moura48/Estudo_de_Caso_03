@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="flex min-h-full min-w-full flex-col justify-center px-6 py-12 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <img class="mx-auto h-[5rem] w-auto" src="{{ url_for('static', filename='assets/favicon.png') }}"
+      alt="Your Company">
+    <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Crie sua conta no SIGH</h2>
+  </div>
+
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <form class="space-y-6">
+      <div>
+        <label for="fullName" class="block text-sm font-medium leading-6 text-gray-900">Nome Completo</label>
+        <div class="mt-2">
+          <input id="fullName" name="fullName" type="text" required
+            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            style="padding: 6px 12px;">
+        </div>
+      </div>
+
+      <div>
+        <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Usuário de Acesso</label>
+        <div class="mt-2">
+          <input id="username" name="username" type="text" required
+            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            style="padding: 6px 12px;">
+        </div>
+      </div>
+
+      <div>
+        <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Senha de Acesso</label>
+        <div class="mt-2">
+          <input id="password" name="password" type="password" autocomplete="current-password" required
+            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            style="padding: 6px 12px;">
+        </div>
+      </div>
+
+      <div>
+        <button type="submit" id="register-button"
+          class="flex w-full justify-center rounded-md bg-[#D90479] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#b00061] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Cadastrar</button>
+      </div>
+    </form>
+
+    <p class="mt-5 text-center text-sm text-gray-500">
+      Já possui uma conta?
+        <a id="login" class="font-semibold leading-6 text-[#D90479] hover:text-[#b00061]" style="cursor: pointer;">Faça login</a>
+      </p>
+  </div>
+</div>
+
+<script>
+  const form = document.querySelector('form');
+  const inputs = form.querySelectorAll('input');
+  const button = form.querySelector('button[type="submit"]');
+
+  const loginConta = document.getElementById('login');
+  loginConta.addEventListener('click', () => {
+    window.location.replace("{{ url_for('login') }}");
+  });
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const value = Object.fromEntries(data.entries());
+    register(value);
+  });
+
+  function register(data) {
+    // Desabilita os inputs e o botão de cadastrar
+    inputs.forEach(input => input.disabled = true);
+    button.disabled = true;
+
+    // Adiciona o loading no botão de cadastrar
+    button.innerHTML = '<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647zM12 20a8 8 0 01-8-8H0c0 6.627 5.373 12 12 12v-4zm3-5.291A7.962 7.962 0 0120 12h-4c0 3.042-1.135 5.824-3 7.938l3-2.647z"></path></svg>Cadastrando...';
+
+    fetch('/register', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+        alert(data.message);
+        window.location.replace("{{ url_for('login') }}");
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      })
+      .finally(() => {
+        // Habilita os inputs e o botão de cadastrar
+        inputs.forEach(input => input.disabled = false);
+        button.disabled = false;
+
+        // Remove o loading do botão de cadastrar
+        button.innerHTML = 'Cadastrar';
+      });
+  }
+
+</script>
+{% endblock %}

@@ -15,7 +15,7 @@ class Cliente:
             print("Entrada inválida. Certifique-se de inserir um valor numérico para a quantidade.")
             return
 
-        with open("database/avaliacao.csv", "r") as arquivo_item:
+        with open("database/itens_avaliados.csv", "r") as arquivo_item:
             leitor_itens = csv.reader(arquivo_item, delimiter=';')
             cabecalho = next(leitor_itens)
             for linha in leitor_itens:
@@ -33,10 +33,30 @@ class Cliente:
                         print("Quantidade superior ao que tem no estoque")
                         return
 
-        with open("database/avaliacao.csv", "w", newline='') as arquivo_item:
+        with open("database/itens_avaliados.csv", "r+", newline='') as arquivo_item:
+            leitor_itens = csv.reader(arquivo_item, delimiter=';')
+            cabecalho = next(leitor_itens)
+            for linha in leitor_itens:
+                nome_item, preco_item, quantidade_item, *_ = linha
+                quantidade_item = int(quantidade_item)
+                if nome_item == escolha:
+                    if quantidade <= quantidade_item:
+                        quantia = quantidade_item - quantidade
+                        if quantia == 0:
+                            print("Você pegou o último item!")
+                        else:
+                            self.itens_selecionados.append([nome_item, preco_item, quantia])
+                            self.estoque_atualizado.append([nome_item, preco_item, quantia])
+                    else:
+                        print("Quantidade superior ao que tem no estoque")
+                        return
+
+        # Reabre o arquivo no modo de escrita, posiciona o ponteiro no início e escreve as informações atualizadas
+        with open("database/itens_avaliados.csv", "w", newline='') as arquivo_item:
             escritor = csv.writer(arquivo_item, delimiter=';')
             escritor.writerow(cabecalho)
             escritor.writerows(self.estoque_atualizado)
+
 
     def concluir_troca(self):
         total_creditos_gastos = sum(int(item[1]) * int(item[2]) for item in self.itens_selecionados)

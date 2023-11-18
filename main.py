@@ -30,15 +30,17 @@ try:
             inquirer.List('opcao',
                         message=f'Selecione o módulo que deseja acessar',
                         choices=[
-                            (f'1 - Módulo de Gestão de Leitos', '1'),
-                            (f'2 - Módulo de Controle de Equipamento', '2'),
-                            (f'3 - Módulo de Administração de Medicamentos', '3'),
-                            (f'4 - Módulo de Agendamento e Controle de Visitas', '4'),
-                            (f'5 - Módulo de Prontuário Eletrônico', '5'),
-                            (f'6 - Módulo de Gestão de Equipes', '6'),
-                            (f'7 - Módulo de Cadastro de Visitantes', '7'),
-                            (f'8 - Módulo de Relátorios e Análises', '8'),
-                            (f'9 - Encerrar a Sessão no Sistema', '9')
+                            (f'1 - Módulo de Cadastro de Itens', '1'),
+                            (f'2 - Módulo de avaliação de Itens', '2'),
+                            (f'3 - Módulo de Gestão de Créditos', '3'),
+                            (f'4 - Módulo de Catálogo de Itens Disponíveis', '4'),
+                            (f'5 - Módulo de Troca de Itens', '5'),
+                            (f'6 - Módulo de Doação de Itens', '6'),
+                            (f'7 - Módulo de Relatórios e Estatísticas', '7'),                       
+                            (f'8 - Módulo de Gestão de Estoque de Produtos à Venda', '8'),
+                            (f'9 - Módulo de Balanço de Vendas', '9'),
+                            (f'10 - Módulo de Relatórios Estatíticos ', '10'),
+                            (f'11 - Encerrar a Sessão no Sistema', '11')
                         ])
         ]
 
@@ -56,30 +58,62 @@ try:
             case '1':
                 #run()
                 pass
+
             case '2':
                 #run()
                 pass
+
             case '3':
                 #run()
                 pass
+
             case '4':
                 #run()
                 pass
+
             case '5':
                 #run()
                 pass
+
             case '6':
-                #run()
-                pass
+                from model.cliente import Cliente
+                cliente = Cliente()
+                cliente.doar_item(input("Nome: "), input("Descrição: "), input("Condição: "))
+
             case '7':
                 #run()
                 pass
+
             case '8':
-               #run()
-               pass
+                from model.funcionario import Funcionario
+                funcionario = Funcionario()
+
+                pergunta = [
+                        inquirer.List('opcao',
+                        message = f'Selecione a opção deseja acessar',
+                        choices = [
+                                (f'1 - Cadastrar produtos', '1'),
+                                (f'2 - Alterar dados do produto', '2'),
+                                (f'3 - Encerrar a Sessão no Sistema', '3')
+                                ])
+                        ]
+                respostas = inquirer.prompt(pergunta)
+                opcao = respostas['opcao']
+
+                match opcao:
+                    case '1':
+                        funcionario.cadastrar_produtos_para_venda(input("Nome: "), input("Categoria: "), input("Preço: "))
+                    
+                    case '2':
+                        funcionario.alterar_dados_produto(input("Nome: "), input("Categoria: "), input("Preço: "))
+
+                    case '3':
+                        break
+               
             case '9':
                 print(f'{cor_mensagem}👋 Obrigado por utilizar o Sistema{Style.RESET_ALL}\n')
                 break
+            
             case _:
                 print(f'{cor_mensagem_erro}❌ Ocorreu um erro estranho{Style.RESET_ALL}\n')
 

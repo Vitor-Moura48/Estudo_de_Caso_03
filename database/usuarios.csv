@@ -1,4 +1,2 @@
-id;usuario;nome_completo;senha
-1;otton;otton;1234
-2;ff;ff;ff
-3;otton2;otton2 nome completo;1234
+id;usuario;nome_completo;senha;creditos;nivel_acesso
+1;otton;otton;1234;0;cliente

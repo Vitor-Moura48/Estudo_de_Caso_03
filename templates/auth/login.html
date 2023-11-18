@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="flex min-h-full min-w-full flex-col justify-center px-6 py-12 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <img class="mx-auto h-[5rem] w-auto" src="{{ url_for('static', filename='assets/favicon.png') }}"
+      alt="Your Company">
+    <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Seja Bem-Vindo</h2>
+    <p class="text-center text-[#7A7A7A]">Acesse sua conta para começar a reciclar e a trocar itens que não usa mais por créditos na
+      loja</p>
+  </div>
+
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <form class="space-y-6">
+      <div>
+        <label for="username" class="block text-sm leading-6 text-gray-900">Usuário de Acesso</label>
+        <div class="mt-2">
+          <input id="username" name="username" type="text" required
+            class="block w-full outline-none rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#F58220] sm:text-sm sm:leading-6"
+            style="padding: 6px 12px;">
+        </div>
+      </div>
+
+      <div>
+        <div class="flex items-center justify-between">
+          <label for="password" class="block text-sm leading-6 text-gray-900">Senha de Acesso</label>
+        </div>
+        <div class="mt-1">
+          <input id="password" name="password" type="password" autocomplete="current-password" required
+            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#F58220] sm:text-sm sm:leading-6"
+            style="padding: 6px 12px;">
+        </div>
+      </div>
+
+      <div>
+        <button type="submit" id="login-button"
+          class="flex w-full justify-center rounded-md bg-[#F58220] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#D8711A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Entrar</button>
+      </div>
+    </form>
+
+    <p class="mt-5 text-center text-sm text-gray-500">
+      Não possui uma conta?
+      <a id="criar_conta" class="font-semibold leading-6 text-[#F58220] hover:text-[#D8711A]"
+        style="cursor: pointer;">Criar conta</a>
+    </p>
+  </div>
+</div>
+
+<script>
+  const form = document.querySelector('form');
+  const inputs = form.querySelectorAll('input');
+  const button = form.querySelector('button[type="submit"]');
+  let user = {};
+
+  // Aqui nos pegamos o elemento com o id criar_conta e adicionamos um evento de click
+  const criarConta = document.getElementById('criar_conta');
+  criarConta.addEventListener('click', () => {
+    // Aqui nos redirecionamos o usuário para a página de registro
+    window.location.replace("{{ url_for('register') }}");
+  });
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const value = Object.fromEntries(data.entries());
+    login(value);
+  });
+
+  async function login(data) {
+    // Desabilita os inputs e o botão de entrar
+    inputs.forEach(input => input.disabled = true);
+    button.disabled = true;
+
+    // Adiciona o loading no botão de entrar
+    button.innerHTML = '<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647zM12 20a8 8 0 01-8-8H0c0 6.627 5.373 12 12 12v-4zm3-5.291A7.962 7.962 0 0120 12h-4c0 3.042-1.135 5.824-3 7.938l3-2.647z"></path></svg>Autenticando...';
+
+    try {
+      const response = await fetch('/login', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const responseData = await response.json();
+      // console.log('Success:', responseData);
+      if (responseData.status === 200) {
+        localStorage.setItem('user', JSON.stringify(responseData.user));
+
+        const user = localStorage.getItem('user');
+        userLogged = JSON.parse(user);
+
+        alert("Sucesso:Login realizado com sucesso!");
+        window.location.replace("{{ url_for('menu') }}");
+      } else {
+        alert("Aviso:Usuário ou senha inválidos.");
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert("Ocorreu um erro ao tentar fazer login, tente novamente mais tarde.");
+    } finally {
+      // Habilita os inputs e o botão de entrar
+      inputs.forEach(input => input.disabled = false);
+      button.disabled = false;
+
+      // Remove o loading do botão de entrar
+      button.innerHTML = 'Entrar';
+    }
+  }
+
+</script>
+{% endblock %}

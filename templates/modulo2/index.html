@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Controle de Equipamentos Médicos</title>
+  <link rel="stylesheet" href="https://unpkg.com/tailwindcss/dist/tailwind.min.css">
+</head>
+<body class="bg-gray-100">
+  <div class="container mx-auto mt-8">
+    <h1 class="text-2xl font-bold mb-8">Controle de Equipamentos Médicos</h1>
+    <table class="table-auto w-full">
+      <thead>
+        <tr>
+          <th class="px-4 py-2">Nome</th>
+          <th class="px-4 py-2">Modelo</th>
+          <th class="px-4 py-2">Número de Série</th>
+          <th class="px-4 py-2">Data de Aquisição</th>
+          <th class="px-4 py-2">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border px-4 py-2">Equipamento 1</td>
+          <td class="border px-4 py-2">Modelo 1</td>
+          <td class="border px-4 py-2">123456</td>
+          <td class="border px-4 py-2">01/01/2021</td>
+          <td class="border px-4 py-2">Disponível</td>
+        </tr>
+        <tr>
+          <td class="border px-4 py-2">Equipamento 2</td>
+          <td class="border px-4 py-2">Modelo 2</td>
+          <td class="border px-4 py-2">789012</td>
+          <td class="border px-4 py-2">02/01/2021</td>
+          <td class="border px-4 py-2">Em uso</td>
+        </tr>
+        <tr>
+          <td class="border px-4 py-2">Equipamento 3</td>
+          <td class="border px-4 py-2">Modelo 3</td>
+          <td class="border px-4 py-2">345678</td>
+          <td class="border px-4 py-2">03/01/2021</td>
+          <td class="border px-4 py-2">Manutenção</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
+
+{% endblock %}

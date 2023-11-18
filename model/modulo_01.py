@@ -5,10 +5,10 @@ import os
 
 class CadastroItens:
     def __init__(self):
-        arquivo_existe = os.path.isfile('database/itens.csv')
+        arquivo_existe = os.path.isfile('database/itens_para_avaliar.csv')
         
         try:
-            with open('database/itens.csv','a',newline='') as arquivo_csv:
+            with open('database/itens_para_avaliar.csv','a',newline='') as arquivo_csv:
                 escritor = csv.writer(arquivo_csv, delimiter=';')
                 if not arquivo_existe:
                     escritor.writerow(['Codigo','Nome','Quantidade','Faixa de Valor','Descricao','Condicao'])
@@ -27,7 +27,7 @@ class CadastroItens:
     def cadastrar(self, nome,quantidade,faixa_valor,descricao,condicao):
         codigo = self.criar_codigo()
         
-        with open('database/itens.csv','r',newline='') as arquivo:
+        with open('database/itens_para_avaliar.csv','r',newline='') as arquivo:
             leitor = csv.reader(arquivo)
 
             while self.codigo_existe(codigo, leitor):
@@ -38,7 +38,7 @@ class CadastroItens:
 
             dados = [codigo,nome,quantidade,faixa_valor,descricao,condicao] 
 
-        with open('database/itens.csv','a',newline='') as arquivo_csv:
+        with open('database/itens_para_avaliar.csv','a',newline='') as arquivo_csv:
             escritor = csv.writer(arquivo_csv, delimiter=';')
             escritor.writerow(dados)
         

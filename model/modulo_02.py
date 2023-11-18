@@ -27,7 +27,7 @@ class AvaliacaoItens:
                     print(f'Código: {item[0]} - Nome: {item[1]}\nQuantidade: {item[2]} - Faixa de valor: {item[3]}\nDescrição: {item[4]} - Condição: {item[5]}\n')
                     itens_para_avaliar.append(item)
 
-            opcao = input('Qual item deseja escolher: ')
+            opcao = input('Qual item deseja escolher para avaliar: ')
                      
             for item in itens_para_avaliar:
                 if len(item) >= 6 and opcao == item[1]:

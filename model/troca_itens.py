@@ -15,38 +15,23 @@ class Cliente:
             print("Entrada inválida. Certifique-se de inserir um valor numérico para a quantidade.")
             return
 
-        with open("database/itens_avaliados.csv", "r") as arquivo_item:
-            leitor_itens = csv.reader(arquivo_item, delimiter=';')
-            cabecalho = next(leitor_itens)
-            for linha in leitor_itens:
-                nome_item, preco_item, quantidade_item, *_ = linha
-                quantidade_item = int(quantidade_item)
-                if nome_item == escolha:
-                    if quantidade <= quantidade_item:
-                        quantia = quantidade_item - quantidade
-                        if quantia == 0:
-                            print("Você pegou o último item!")
-                        else:
-                            self.itens_selecionados.append([nome_item, preco_item, quantia])
-                            self.estoque_atualizado.append([nome_item, preco_item, quantia])
-                    else:
-                        print("Quantidade superior ao que tem no estoque")
-                        return
-
         with open("database/itens_avaliados.csv", "r+", newline='') as arquivo_item:
             leitor_itens = csv.reader(arquivo_item, delimiter=';')
             cabecalho = next(leitor_itens)
             for linha in leitor_itens:
-                nome_item, preco_item, quantidade_item, *_ = linha
+                nome_item = linha[1]
+                quantidade_item = linha[2]
                 quantidade_item = int(quantidade_item)
+                preco_item = linha[5]
                 if nome_item == escolha:
                     if quantidade <= quantidade_item:
                         quantia = quantidade_item - quantidade
                         if quantia == 0:
+                            self.itens_selecionados.append([linha[0],nome_item, quantidade, linha[3], linha[4], preco_item, linha[6]])
                             print("Você pegou o último item!")
                         else:
-                            self.itens_selecionados.append([nome_item, preco_item, quantia])
-                            self.estoque_atualizado.append([nome_item, preco_item, quantia])
+                            self.itens_selecionados.append([linha[0],nome_item, quantia, linha[3], linha[4], preco_item, linha[6]])
+                            self.estoque_atualizado.append([linha[0],nome_item, quantia, linha[3], linha[4], preco_item, linha[6]])
                     else:
                         print("Quantidade superior ao que tem no estoque")
                         return
@@ -59,7 +44,7 @@ class Cliente:
 
 
     def concluir_troca(self):
-        total_creditos_gastos = sum(int(item[1]) * int(item[2]) for item in self.itens_selecionados)
+        total_creditos_gastos = sum(int(item[5]) * int(item[2]) for item in self.itens_selecionados)
         if total_creditos_gastos <= self.creditos:
             self.creditos -= total_creditos_gastos
             return True

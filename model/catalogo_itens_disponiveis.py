@@ -3,7 +3,7 @@ import csv
 class catalogo_itens_disponiveis:
     
     def mostrar_catalogo(self):
-        with open('database/avaliacao.csv', 'r') as arquivo_itens:
+        with open('database/itens_avaliados.csv', 'r') as arquivo_itens:
             leitor_itens = csv.reader(arquivo_itens, delimiter=';')
             cabecalho = next(leitor_itens)
             for item in leitor_itens:

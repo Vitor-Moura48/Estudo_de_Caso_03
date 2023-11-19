@@ -35,7 +35,8 @@ class Cliente:
                     else:
                         print("Quantidade superior ao que tem no estoque")
                         return
-
+                else:
+                    print("Não tem este item no estoque")
         # Reabre o arquivo no modo de escrita, posiciona o ponteiro no início e escreve as informações atualizadas
         with open("database/itens_avaliados.csv", "w", newline='') as arquivo_item:
             escritor = csv.writer(arquivo_item, delimiter=';')

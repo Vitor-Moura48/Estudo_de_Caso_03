@@ -4,7 +4,7 @@
 <div class="flex min-h-full min-w-full flex-col justify-center px-6 py-12 lg:px-8">
   <div class="sm:mx-auto sm:w-full sm:max-w-sm">
     <img class="mx-auto h-[5rem] w-auto" src="{{ url_for('static', filename='assets/favicon.png') }}"
-      alt="Your Company">
+      alt="Convenience Swap">
     <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Seja Bem-Vindo</h2>
     <p class="text-center text-[#7A7A7A]">Acesse sua conta para começar a reciclar e a trocar itens que não usa mais por créditos na
       loja</p>
@@ -85,9 +85,9 @@
       const responseData = await response.json();
       // console.log('Success:', responseData);
       if (responseData.status === 200) {
-        localStorage.setItem('user', JSON.stringify(responseData.user));
+        localStorage.setItem('userToken', JSON.stringify(responseData.user));
 
-        const user = localStorage.getItem('user');
+        const user = localStorage.getItem('userToken');
         userLogged = JSON.parse(user);
 
         alert("Sucesso:Login realizado com sucesso!");

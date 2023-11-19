@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+
+{% block head %}
+<style>
+  [card-options] {
+    display: none;
+    cursor: pointer;
+    min-width: 8.85rem;
+    min-height: 7.6rem;
+    /* background-color: #ffffff; */
+    box-shadow: 0px 1px 3px 2px rgba(0, 0, 0, 0.10);
+
+    &+[card-options] {
+      margin-left: 1.2rem;
+    }
+
+    &+div[todos_acessos] {
+      margin-left: 1.2rem;
+    }
+  }
+
+  [todos_acessos],
+  [visitant],
+  [cliente],
+  [funcionario],
+  [gerente] {
+    display: none;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="flex flex-col min-h-full min-w-full">
+
+  <header class="w-full py-2 bg-[#FFE7D3]">
+    <div class="flex max-w-6xl my-0 mx-auto px-8 items-center justify-between">
+
+      <div class="flex items-center">
+        <div class="flex items-center justify-center w-12 h-12 rounded-full bg-[#FFCA9D]">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M12 0.5C18.3514 0.5 23.5 5.64855 23.5 12C23.504 14.6541 22.5862 17.2272 20.9033 19.2795L20.9263 19.3048L20.7745 19.4336C19.6961 20.7092 18.3521 21.734 16.8366 22.4363C15.321 23.1387 13.6704 23.5017 12 23.5C8.6075 23.5 5.56001 22.0314 3.45551 19.6969L3.22551 19.4324L3.07371 19.3059L3.09671 19.2783C1.41398 17.2264 0.496127 14.6537 0.500012 12C0.500012 5.64855 5.64856 0.5 12 0.5ZM12 17.75C9.861 17.75 7.92785 18.4308 6.48805 19.3657C8.07769 20.559 10.0123 21.2028 12 21.2C13.9877 21.2028 15.9223 20.559 17.5119 19.3657C15.8666 18.3119 13.9539 17.7512 12 17.75ZM12 2.8C10.2687 2.79995 8.57253 3.28842 7.10643 4.20927C5.64034 5.13011 4.46383 6.44596 3.71214 8.00555C2.96045 9.56515 2.66408 11.3052 2.85711 13.0257C3.05013 14.7462 3.72471 16.3773 4.80331 17.7316C6.66746 16.3941 9.21125 15.45 12 15.45C14.7887 15.45 17.3325 16.3941 19.1967 17.7316C20.2753 16.3773 20.9499 14.7462 21.1429 13.0257C21.3359 11.3052 21.0395 9.56515 20.2879 8.00555C19.5362 6.44596 18.3597 5.13011 16.8936 4.20927C15.4275 3.28842 13.7313 2.79995 12 2.8ZM12 5.1C13.22 5.1 14.39 5.58464 15.2527 6.44731C16.1154 7.30997 16.6 8.48 16.6 9.7C16.6 10.92 16.1154 12.09 15.2527 12.9527C14.39 13.8154 13.22 14.3 12 14.3C10.78 14.3 9.60998 13.8154 8.74731 12.9527C7.88464 12.09 7.4 10.92 7.4 9.7C7.4 8.48 7.88464 7.30997 8.74731 6.44731C9.60998 5.58464 10.78 5.1 12 5.1ZM12 7.4C11.39 7.4 10.805 7.64232 10.3737 8.07365C9.94232 8.50499 9.7 9.09 9.7 9.7C9.7 10.31 9.94232 10.895 10.3737 11.3263C10.805 11.7577 11.39 12 12 12C12.61 12 13.195 11.7577 13.6263 11.3263C14.0577 10.895 14.3 10.31 14.3 9.7C14.3 9.09 14.0577 8.50499 13.6263 8.07365C13.195 7.64232 12.61 7.4 12 7.4Z"
+              fill="#417453" />
+          </svg>
+        </div>
+        <p nome_usuario class="ml-2 text-[#444444]"></p>
+      </div>
+
+      <div class="flex items-center">
+        <svg width="24" height="24" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="9" cy="9" r="9" fill="#417453" />
+          <path
+            d="M5.16875 12.8313C5.06563 12.7281 5.01406 12.5969 5.01406 12.4375C5.01406 12.2781 5.06563 12.1469 5.16875 12.0437L5.94219 11.2703C5.64219 10.8859 5.41006 10.4594 5.24581 9.99062C5.08156 9.52187 4.99963 9.025 5 8.5C5 7.24375 5.43594 6.17969 6.30781 5.30781C7.17969 4.43594 8.24375 4 9.5 4H14V8.5C14 9.75625 13.5641 10.8203 12.6922 11.6922C11.8203 12.5641 10.7563 13 9.5 13C8.975 13 8.48038 12.9179 8.01613 12.7536C7.55188 12.5894 7.12775 12.3574 6.74375 12.0578L5.95625 12.8313C5.85313 12.9344 5.72188 12.9859 5.5625 12.9859C5.40313 12.9859 5.27188 12.9344 5.16875 12.8313ZM7.44688 10.5531C7.55 10.675 7.68125 10.7337 7.84063 10.7292C8 10.7247 8.13594 10.666 8.24844 10.5531L10.4563 8.34531C10.5688 8.23281 10.625 8.09931 10.625 7.94481C10.625 7.79031 10.5688 7.65663 10.4563 7.54375C10.3531 7.44063 10.2219 7.38906 10.0625 7.38906C9.90313 7.38906 9.77188 7.44063 9.66875 7.54375L7.44688 9.76562C7.34375 9.86875 7.29219 9.99775 7.29219 10.1526C7.29219 10.3075 7.34375 10.441 7.44688 10.5531Z"
+            fill="white" />
+        </svg>
+
+        <p creditos_usuario class="ml-2 text-[#417453]">?? Ecoins</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="w-full">
+    <div class="flex max-w-6xl flex-col my-0 mx-auto px-8 items-start justify-start">
+
+      <div class="flex w-full items-center justify-between mt-11">
+        <span class="text-[#7A7A7A]">Itens cadastrados:</span>
+
+        <div class="flex items-center">
+
+          <div class="flex items-center">
+            <div class="w-6 h-6 bg-[#EE43B4] rounded-full">
+            </div>
+            <span class="ml-3">Para Doação</span>
+          </div>
+
+          <div class="flex items-center ml-4">
+            <div class="w-6 h-6 bg-[#417453] rounded-full">
+            </div>
+            <span class="ml-3">Para Troca</span>
+          </div>
+
+          <div
+            class="flex ml-4 cursor-pointer items-center justify-center py-2 px-4 rounded-md bg-[#417453] hover:bg-[#30573e]">
+            <span class="text-white">Cadastrar</span>
+          </div>
+        </div>
+
+        
+        
+      </div>
+      <!-- Tabela feita com tailwind com as colunas Id, tipo do item, item cadastrado, situação rendimento -->
+      <div class="mt-8 w-full">
+        <table class="w-full">
+          <thead class="bg-[#417453]">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-center text-white font-regular">
+                Id</th>
+              <th scope="col" class="px-6 py-3 w-[9rem] text-center text-white font-regular">
+                Tipo do Item</th>
+              <th scope="col" class="px-6 py-3 text-left text-white font-regular w-1/3">
+                Item Cadastrado
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-white font-regular">
+                Situação</th>
+              <th scope="col" class="px-6 py-3 text-center text-white font-regular">
+                Rendimento</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-x divide-[#D9D9D9]">
+            <tr class="border border-[#D9D9D9]">
+              <td class="px-6 py-4">
+                <div class="text-[#7A7A7A]">1</div>
+              </td>
+              <td class="px-6 py-4 w-full flex items-center justify-center">
+                <div class="w-6 h-6 bg-[#EE43B4] rounded-full">
+                </div>
+              </td>
+              <td class="px-6 py-4">
+                <div class="text-[#7A7A7A]">Camiseta</div>
+              </td>
+              <td class="px-6 py-4">
+                <div class="text-[#7A7A7A]">Aprovado</div>
+              </td>
+              <td class="px-6 py-4  w-full flex items-center justify-center">
+                <div class="text-[#7A7A7A] items-center">0</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+<script defer>
+  let tokenUser = {};
+  let userInfo = {};
+  let count = 0;
+
+  init();
+
+  function init() {
+    count++;
+
+    const userToken = JSON.parse(localStorage.getItem('userToken'));
+    const todosAcessos = document.querySelectorAll('[todos_acessos]');
+
+    if (userToken?.token && count === 2) {
+      getUserLogged(userToken.token);
+    } else {
+      console.log('Não há usuário logado', count);
+      // window.location.replace('/menu');
+    }
+
+    // Função para pegar o usuário logado
+    async function getUserLogged(token) {
+      try {
+        const response = await fetch(`/api/userInfo?token=${token}`);
+        const data = await response.json();
+
+        if (data.status === 200) {
+          userInfo = data.user;
+          setUserInfo();
+        } else {
+          console.log('Não há usuário logado');
+          // window.location.replace('/menu');
+        }
+
+        return data;
+      } catch (error) {
+        alert('Erro ao buscar usuário logado');
+      }
+    }
+
+    // Função para setar as informações do usuário logado
+    function setUserInfo() {
+      const nomeUsuario = document.querySelector('[nome_usuario]');
+      const creditosUsuario = document.querySelector('[creditos_usuario]');
+
+      nomeUsuario.innerHTML = userInfo.nome;
+      creditosUsuario.innerHTML = `${userInfo.creditos} Ecoins`;
+
+    }
+  }
+
+</script>
+{% endblock %}

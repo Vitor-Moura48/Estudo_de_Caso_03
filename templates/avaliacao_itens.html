@@ -36,16 +36,12 @@
     <div class="flex max-w-6xl my-0 mx-auto px-8 items-center justify-between">
 
       <div class="flex items-center">
-        <div class="flex items-center cursor-pointer" onclick="back()">
-          <svg width="11" height="20" viewBox="0 0 11 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 1L1 10L10 19" stroke="#444444" stroke-width="1.5" stroke-linecap="round"
-              stroke-linejoin="round" />
-          </svg>
-          <span class="text-[#444444] ml-3">Voltar</span>
-        </div>
+        <svg width="26" height="28" viewBox="0 0 26 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M13 0C8.64802 0 5.10828 3.51245 5.10828 7.83089C5.10828 12.1493 8.64802 15.6618 13 15.6618C17.352 15.6618 20.8917 12.1493 20.8917 7.83089C20.8917 3.51245 17.352 0 13 0ZM12.4943 1.87502L11.7796 3.99815L14.9451 3.66907L14.6302 2.6175L15.518 2.86141V4.02803L16.9047 4.11778L16.6335 3.07085L17.3624 2.65196C18.8526 3.88852 19.799 5.74769 19.799 7.83089C19.799 8.83493 19.579 9.78686 19.1844 10.6423L17.5981 10.9087V12.8048C17.2955 13.0803 16.9684 13.3281 16.6208 13.5451L15.94 12.4941L14.6134 12.8531L14.9862 14.2859C14.3422 14.4798 13.6729 14.5781 13 14.5775C11.1173 14.5775 9.41613 13.8224 8.18624 12.6001L9.39792 12.4344L10.212 10.8488L7.61912 9.56248L9.4582 8.00678L7.86043 6.69059L6.22788 7.2305C6.41679 5.0952 7.60304 3.24861 9.32349 2.15139L9.66927 4.89557L12.4943 1.87502ZM14.8546 5.74329L12.6588 7.13936L14.5775 8.83161L15.9632 8.42971L15.8352 10.0797L18.3721 9.44507L17.4127 7.28748L15.8779 7.30863L17.2423 6.1452L14.8546 5.74329H14.8546ZM12.5737 8.17587L11.4011 8.68349L12.2325 9.29695L12.5737 8.17587ZM9.81994 8.36586L9.006 9.32303L11.261 10.8957L9.81994 8.36586ZM13.4477 8.89504L12.6163 10.4394L14.6202 11.7931L13.9167 10.7989L14.7907 9.76234L13.4477 8.89504ZM1.11204 10.5453C0.576739 10.537 0.0288719 11.2135 0.0257152 12.9476C0.0209802 15.6073 -0.238718 16.3581 1.00168 19.366C1.91123 21.5718 2.31911 23.2672 5.22969 24.6372C5.5745 25.8432 5.43688 26.1268 5.20298 27.1575C4.98469 28.1197 7.23194 28.2966 8.87773 27.486C10.6437 26.5301 10.4955 23.8984 10.18 22.1138C9.81314 20.0383 8.65877 19.607 7.65816 18.7205C6.61918 17.2461 6.37739 14.5753 4.69233 13.4979C4.34042 13.2729 2.54518 13.0445 5.01176 19.1568C1.75971 18.3575 2.35207 14.6526 2.1169 11.9096C2.04684 11.0927 1.58433 10.5524 1.11204 10.5452V10.5453ZM24.888 10.5453C24.4157 10.5525 23.9532 11.0927 23.8831 11.9096C23.6479 14.6526 24.2403 18.3575 20.9882 19.1568C23.4549 13.0444 21.6596 13.2729 21.3077 13.4979C19.6226 14.5753 19.3809 17.2461 18.3418 18.7205C17.3413 19.607 16.1868 20.0383 15.82 22.1138C15.5045 23.8984 15.3563 26.5301 17.1223 27.486C18.7681 28.2965 21.0153 28.1197 20.797 27.1575C20.5631 26.1268 20.4255 25.8432 20.7703 24.6372C23.6809 23.2672 24.0888 21.5718 24.9983 19.366C26.2387 16.3581 25.979 15.6073 25.9743 12.9477C25.9711 11.2135 25.4233 10.537 24.888 10.5453Z" fill="#F58220"/>
+        </svg>
         <div class="ml-2">
           <p class="ml-2 text-[#417453] whitespace-pre text-sm font-bold -mb-1">Môdulo</p>
-          <p class="ml-2 text-[#444444] whitespace-pre">Cadastro de Itens para Troca ou Doação</p>
+          <p class="ml-2 text-[#444444] whitespace-pre">Avaliação de Itens + Gestão de Créditos</p>
         </div>
       </div>
 
@@ -74,7 +70,8 @@
           </div>
         </div>
 
-        <div onclick="backModule()"
+        <div
+          onclick="backModule()"
           class="flex ml-2 cursor-pointer items-center justify-center py-2 px-4 rounded-md bg-[#FFD1D1] hover:bg-[#FFADAD]">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -94,129 +91,54 @@
   <div class="w-full">
     <div class="flex max-w-6xl flex-col my-0 mx-auto px-8 items-start justify-start">
 
-      <form class="flex w-full items-start justify-between mt-11" enctype="multipart/form-data">
-        <div class="w-[40%]">
+      <div class="flex w-full items-center justify-between mt-11">
+        <span class="text-[#7A7A7A]">Itens a serem avaliados: </span>
 
-          <label for="foto_item" class="text-[#7A7A7A]">Anexar Foto do Item</label>
-          <div class="relative mt-2">
-            <div id="foto_preview" class="mb-2 w-full"></div>
-            <input type="file" name="foto_item" id="foto_item" accept=".jpg, .png" class="hidden">
-            <label for="foto_item"
-              class="flex items-center justify-center w-full h-12 bg-[#F3F4F6] border border-[#E5E7EB] rounded-md cursor-pointer">
-              <svg class="w-6 h-6 text-[#7A7A7A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
-                </path>
-              </svg>
-              <span class="ml-2 text-[#7A7A7A]">Selecionar Imagem</span>
-            </label>
+        <div class="flex items-center">
+
+          <div class="flex items-center">
+            <div class="w-6 h-6 bg-[#EE43B4] rounded-full">
+            </div>
+            <span class="ml-3">Para Doação</span>
           </div>
 
-          <script>
-            const fotoInput = document.getElementById('foto_item');
-            const fotoPreview = document.getElementById('foto_preview');
-
-            fotoInput.addEventListener('change', function () {
-              const file = this.files[0];
-              const reader = new FileReader();
-
-              reader.onload = function (e) {
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.classList.add('w-full', 'h-[30%]', 'object-cover', 'rounded-md');
-                fotoPreview.innerHTML = '';
-                fotoPreview.appendChild(img);
-              }
-
-              reader.readAsDataURL(file);
-            });
-          </script>
+          <div class="flex items-center ml-4">
+            <div class="w-6 h-6 bg-[#417453] rounded-full">
+            </div>
+            <span class="ml-3">Para Troca</span>
+          </div>
         </div>
 
-        <div class="w-[55%]">
-          <div>
-            <label for="tipo_item" class="text-[#7A7A7A]">Tipo de Item</label>
-            <div class="flex items-center">
-              <input type="radio" id="troca" name="tipo_item" value="1" class="mr-2">
-              <label for="troca" class="text-[#444444]">Troca</label>
-            </div>
-            <div class="flex items-center">
-              <input type="radio" id="doacao" name="tipo_item" value="3" class="mr-2">
-              <label for="doacao" class="text-[#444444]">Doação</label>
-            </div>
-          </div>
 
-          <div class="mt-3">
-            <label for="categoria_item" class="block leading-6 text-[#444444]">Categoria de Item</label>
-            <div class="mt-2">
-              <select id="categoria_item" name="categoria_item"
-                class="block w-full outline-none rounded-md border-0 py-1.5 text-[#444444] shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-[#F58220] sm:leading-6"
-                style="padding: 6px 12px;">
-                <option value="" disabled selected>Selecione a categoria</option>
-                {% for categoria in categorias_itens %}
-                  <option value="{{ categoria.nome }}">{{ categoria.nome }}</option>
-                {% endfor %}
-              </select>
-            </div>
-          </div>
 
-          <div class="mt-3">
-            <label for="quantidade_item" class="block leading-6 text-[#444444]">Quantidade do Item</label>
-            <div class="mt-2">
-              <input value="1" id="quantidade_item" name="quantidade_item" type="number"
-                placeholder="Informe a quantidade do item"
-                class="block w-full outline-none rounded-md border-0 py-1.5 text-[#444444] shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-[#7A7A7A] focus:ring-2 focus:ring-inset focus:ring-[#F58220] sm:leading-6"
-                style="padding: 6px 12px;">
-            </div>
-          </div>
-
-          <div class="mt-3">
-            <label for="nome_item" class="block leading-6 text-[#444444]">Nome do Item</label>
-            <div class="mt-2">
-              <input id="nome_item" name="nome_item" type="text" placeholder="Informe o nome do item"
-                class="block w-full outline-none rounded-md border-0 py-1.5 text-[#444444] shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-[#7A7A7A] focus:ring-2 focus:ring-inset focus:ring-[#F58220] sm:leading-6"
-                style="padding: 6px 12px;">
-            </div>
-          </div>
-
-          <div class="mt-3">
-            <label for="descricao_item" class="block leading-6 text-[#444444]">Descrição do Item</label>
-            <div class="mt-2">
-              <textarea id="descricao_item" name="descricao_item" placeholder="Informe a descrição do item"
-                class="block w-full outline-none rounded-md border-0 py-1.5 text-[#444444] shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-[#7A7A7A] focus:ring-2 focus:ring-inset focus:ring-[#F58220] sm:leading-6"
-                style="padding: 6px 12px;"></textarea>
-            </div>
-          </div>
-
-          <div class="mt-3">
-            <label for="condicao_item" class="block leading-6 text-[#444444]">Condição do Item</label>
-            <div class="mt-2">
-              <textarea id="condicao_item" name="condicao_item" placeholder="Informe a condição do item"
-                class="block w-full outline-none rounded-md border-0 py-1.5 text-[#444444] shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-[#7A7A7A] focus:ring-2 focus:ring-inset focus:ring-[#F58220] sm:leading-6"
-                style="padding: 6px 12px;"></textarea>
-            </div>
-          </div>
-
-          <div class="mt-3 mb-5">
-            <button type="submit" id="send-avaliacao-button"
-              class="flex w-full justify-center rounded-md bg-[#F58220] px-3 py-1.5 leading-6 text-white shadow-sm hover:bg-[#D8711A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">Enviar
-              para Avaliação</button>
-          </div>
-
-          <!-- <div
-            class="flex mt-4  w-full cursor-pointer items-center justify-center py-2 px-4 rounded-md bg-[#F58220] hover:bg-[#D8711A]">
-            <span class="ml-3 text-white">Enviar para Avaliação</span>
-          </div> -->
-        </div>
+      </div>
+      <!-- Tabela feita com tailwind com as colunas Id, tipo do item, item cadastrado, situação rendimento -->
+      <div class="mt-8 w-full">
+        <table class="w-full">
+          <thead class="bg-[#417453]">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-center text-white font-regular">
+                Id</th>
+              <th scope="col" class="px-6 py-3 text-center text-white font-regular">
+                Tipo</th>
+              <th scope="col" class="px-6 py-3 text-center text-white font-regular">
+                Categoria</th>
+              <th scope="col" class="px-6 py-3 text-left text-white font-regular w-[50%]">
+                Nome
+              </th>
+              <th scope="col" class="px-6 py-3 text-center text-white font-regular">
+                Ação</th>
+            </tr>
+          </thead>
+          <tbody tableBody class="bg-white ">
+          </tbody>
+        </table>
+      </div>
     </div>
-    </form>
-  </div>
+
   </div>
 </section>
 <script defer>
-  const form = document.querySelector('form');
-  const inputFoto = document.querySelector('#foto_item');
-
   let tokenUser = {};
   let userInfo = {};
   let count = 0;
@@ -244,12 +166,13 @@
 
         if (data.status === 200) {
           userInfo = data.user;
+          getItensAvaliacao();
+          
+          console.log("nivel de acesso", data.user.nivel_acesso);
 
-          console.log("=> user", data);
-
-          if (data.user.nivel_acesso !== "cliente") {
+          if (data.user.nivel_acesso !== "funcionario") {
             window.location.replace('/menu');
-            alert('Erro: Você não tem acesso a essa página');
+            alert('Erro:Você não tem acesso a essa página');
             return
           }
 
@@ -276,68 +199,77 @@
     }
   }
 
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const data = new FormData(form);
-    const value = Object.fromEntries(data.entries());
-
-    if (!value.nome_item || !value.descricao_item || !value.condicao_item || !value.tipo_item || !value.quantidade_item || !value.categoria_item) {
-      alert('Por favor, preencha todos os campos do formulário.');
-      return;
-    }
-
-    // valida se uma imagem foi selecionada
-    console.log(inputFoto.files[0]);
-    if (!inputFoto.files[0]) {
-      alert('Por favor, selecione uma imagem para o item.');
-      return;
-    }
-
-    console.log(value);
-    sendFormToAvaliation(value);
-  });
-
   // Função para sair do módulo
   function backModule() {
     window.location.replace('/menu');
   }
 
-  // Função para voltar
-  function back() {
-    window.location.replace('/itens_cadastrados');
-  }
-
-  // Função para enviar os dados do formulário para a avaliação
-  async function sendFormToAvaliation(data) {
+  // Função para pegar itens cadastrados
+  async function getItensAvaliacao() {
     try {
-      const formData = new FormData();
-      formData.append('foto_item', inputFoto.files[0]);
-      formData.append('nome_item', data.nome_item);
-      formData.append('categoria_item', data.categoria_item);
-      formData.append('descricao_item', data.descricao_item);
-      formData.append('condicao_item', data.condicao_item);
-      formData.append('tipo_item', data.tipo_item);
-      formData.append('quantidade_item', data.quantidade_item);
-      formData.append('id_usuario', userInfo.id_usuario);
+      const response = await fetch(`/api/avaliacaoItens`);
+      const data = await response.json();
 
-      fetch('/cadastrar_item', {
-        method: 'POST',
-        body: formData
-      }).then((response) => {
-        console.log(response);
-        if (response.status === 201) {
-          alert('Sucesso:Item enviado para avaliação com sucesso!');
-          window.location.replace('/itens_cadastrados');
-        } else {
-          alert('Erro ao enviar item para avaliação');
+      console.warn("Data =>", data);
+      if (data.itens) {
+          const tableBody = document.querySelector('[tableBody]');
+
+          data.itens.forEach(item => {
+
+            const row = document.createElement('tr');
+            row.classList.add('border', 'border-[#D9D9D9]');
+
+            const idCell = document.createElement('td');
+            idCell.classList.add('px-6', 'py-4');
+            idCell.innerHTML = `<div class="text-[#7A7A7A]">#${item.id}</div>`;
+            row.appendChild(idCell);
+
+            const tipoCell = document.createElement('td');
+            tipoCell.classList.add('px-6', 'py-4', 'w-full', 'flex', 'items-center', 'justify-center');
+
+              // # Tipos de itens
+              // # 1 - Troca
+              // # 2 - Venda
+              // # 3 - Doação
+            if (item.tipo === 1) {
+              tipoCell.innerHTML = `<div class="w-6 h-6 bg-[#417453] rounded-full"></div>`;
+            } else if (item.tipo === 2) {
+              tipoCell.innerHTML = `<div class="w-6 h-6 bg-[#F58220] rounded-full"></div>`;
+            } else {
+              tipoCell.innerHTML = `<div class="w-6 h-6 bg-[#EE43B4] rounded-full"></div>`;
+            }
+
+            row.appendChild(tipoCell);
+
+            const categoriaCell = document.createElement('td');
+            categoriaCell.classList.add('px-6', 'py-4');
+            categoriaCell.innerHTML = `<div class="text-[#7A7A7A]">${item.categoria}</div>`;
+            row.appendChild(categoriaCell);
+
+            const nomeCell = document.createElement('td');
+            nomeCell.classList.add('px-6', 'py-4');
+            nomeCell.innerHTML = `<div class="text-[#7A7A7A]">${item.nome_item}</div>`;
+            row.appendChild(nomeCell);
+
+            const quantidadeCell = document.createElement('td');
+            quantidadeCell.classList.add('px-6', 'py-4', 'w-full', 'flex', 'items-center', 'justify-center');
+            quantidadeCell.innerHTML = `
+            <div
+            onclick="window.location.replace('/avaliar_item/${item.id}')"
+            class="flex cursor-pointer items-center justify-center py-1 px-4 rounded-md text-[0.9rem] bg-[#F58220] hover:bg-[#D8711A]">
+            <span class="text-white">Avaliar</span>
+          </div>`;
+            row.appendChild(quantidadeCell);
+
+            tableBody.appendChild(row);
+          });
         }
-      });
 
     } catch (error) {
       console.error(error);
-      alert('Erro ao enviar item para avaliação');
+      alert('Erro ao buscar itens cadastrados');
     }
   }
 
 </script>
-{% endblock %}...
+{% endblock %}

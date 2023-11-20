@@ -32,7 +32,7 @@
 {% block content %}
 <section class="flex flex-col min-h-full min-w-full">
 
-  <header class="w-full py-2 bg-[#FFE7D3]">
+  <header class="fixed z-50 w-full py-2 bg-[#FFE7D3]">
     <div class="flex max-w-6xl my-0 mx-auto px-8 items-center justify-between">
 
       <div class="flex items-center">
@@ -45,7 +45,7 @@
         </div>
         <div class="ml-2">
           <p class="ml-2 text-[#417453] whitespace-pre text-sm font-bold -mb-1">Môdulo</p>
-          <p class="ml-2 text-[#444444] whitespace-pre">Cadastro de Itens para Troca ou Doação</p>
+          <p class="ml-2 text-[#444444] whitespace-pre">Avaliação de Itens + Gestão de Créditos</p>
         </div>
       </div>
 
@@ -91,131 +91,141 @@
     </div>
   </header>
 
-  <div class="w-full">
+  <div class="mt-16 w-full">
     <div class="flex max-w-6xl flex-col my-0 mx-auto px-8 items-start justify-start">
 
       <form class="flex w-full items-start justify-between mt-11" enctype="multipart/form-data">
         <div class="w-[40%]">
 
-          <label for="foto_item" class="text-[#7A7A7A]">Anexar Foto do Item</label>
+          <label class="text-[#7A7A7A]">Foto anexada do item <strong
+              class="text-[#F58220]">#{{item.id}}</strong></label>
           <div class="relative mt-2">
-            <div id="foto_preview" class="mb-2 w-full"></div>
-            <input type="file" name="foto_item" id="foto_item" accept=".jpg, .png" class="hidden">
-            <label for="foto_item"
-              class="flex items-center justify-center w-full h-12 bg-[#F3F4F6] border border-[#E5E7EB] rounded-md cursor-pointer">
-              <svg class="w-6 h-6 text-[#7A7A7A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
-                </path>
-              </svg>
-              <span class="ml-2 text-[#7A7A7A]">Selecionar Imagem</span>
-            </label>
+            <div id="foto_preview" class="mb-2 w-full">
+              <img src="{{ url_for('static', filename='assets/img/' + item.foto_anexada) }}" alt="Foto do Item"
+                class="w-full h-[30%] object-cover rounded-md">
+            </div>
           </div>
-
-          <script>
-            const fotoInput = document.getElementById('foto_item');
-            const fotoPreview = document.getElementById('foto_preview');
-
-            fotoInput.addEventListener('change', function () {
-              const file = this.files[0];
-              const reader = new FileReader();
-
-              reader.onload = function (e) {
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.classList.add('w-full', 'h-[30%]', 'object-cover', 'rounded-md');
-                fotoPreview.innerHTML = '';
-                fotoPreview.appendChild(img);
-              }
-
-              reader.readAsDataURL(file);
-            });
-          </script>
         </div>
 
         <div class="w-[55%]">
           <div>
-            <label for="tipo_item" class="text-[#7A7A7A]">Tipo de Item</label>
-            <div class="flex items-center">
-              <input type="radio" id="troca" name="tipo_item" value="1" class="mr-2">
-              <label for="troca" class="text-[#444444]">Troca</label>
-            </div>
-            <div class="flex items-center">
-              <input type="radio" id="doacao" name="tipo_item" value="3" class="mr-2">
-              <label for="doacao" class="text-[#444444]">Doação</label>
+            <span for="tipo_item" class="text-[#444444]">Tipo de Item: </span>
+
+            <!-- # Tipos de itens
+            # 1 - Troca
+            # 2 - Venda
+            # 3 - Doação -->
+
+            {% if item.tipo == 1 %}
+            <span class="ml-2 text-[#417453]"><strong>Troca</strong></span>
+            {% elif item.tipo == 2 %}
+            <span class="ml-2 text-[#F58220]"><strong>Venda</strong></span>
+            {% elif item.tipo == 3 %}
+            <span class="ml-2 text-[#EE43B4]"><strong>Doação</strong></span>
+            {% endif %}
+          </div>
+
+          <div class="mt-3">
+            <p for="tipo_item" class="text-[#444444]">Categoria: <span class="text-[#7A7A7A]">{{item.categoria}}</span>
+            </p>
+          </div>
+
+
+          <div class="mt-3">
+            <p class="text-[#444444]">Quantidade: <span class="text-[#7A7A7A]">{{item.quantidade}}</span></p>
+          </div>
+
+          <div class="mt-3">
+            <label class="block leading-6 text-[#444444]">Nome do Item:</label>
+            <div>
+              <span class="text-[#7A7A7A]">{{item.nome_item}}</span>
             </div>
           </div>
 
           <div class="mt-3">
-            <label for="categoria_item" class="block leading-6 text-[#444444]">Categoria de Item</label>
-            <div class="mt-2">
-              <select id="categoria_item" name="categoria_item"
-                class="block w-full outline-none rounded-md border-0 py-1.5 text-[#444444] shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-[#F58220] sm:leading-6"
-                style="padding: 6px 12px;">
-                <option value="" disabled selected>Selecione a categoria</option>
-                {% for categoria in categorias_itens %}
-                  <option value="{{ categoria.nome }}">{{ categoria.nome }}</option>
-                {% endfor %}
-              </select>
+            <label for="descricao_item" class="block leading-6 text-[#444444]">Descrição do Item:</label>
+            <div>
+              <span class="text-[#7A7A7A]">{{item.descricao}}</span>
             </div>
           </div>
 
           <div class="mt-3">
-            <label for="quantidade_item" class="block leading-6 text-[#444444]">Quantidade do Item</label>
-            <div class="mt-2">
-              <input value="1" id="quantidade_item" name="quantidade_item" type="number"
-                placeholder="Informe a quantidade do item"
-                class="block w-full outline-none rounded-md border-0 py-1.5 text-[#444444] shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-[#7A7A7A] focus:ring-2 focus:ring-inset focus:ring-[#F58220] sm:leading-6"
-                style="padding: 6px 12px;">
+            <label for="condicao_item" class="block leading-6 text-[#444444]">Condição do Item:</label>
+            <div>
+              <span class="text-[#7A7A7A]">{{item.condicao}}</span>
             </div>
-          </div>
 
-          <div class="mt-3">
-            <label for="nome_item" class="block leading-6 text-[#444444]">Nome do Item</label>
-            <div class="mt-2">
-              <input id="nome_item" name="nome_item" type="text" placeholder="Informe o nome do item"
-                class="block w-full outline-none rounded-md border-0 py-1.5 text-[#444444] shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-[#7A7A7A] focus:ring-2 focus:ring-inset focus:ring-[#F58220] sm:leading-6"
-                style="padding: 6px 12px;">
+            <div class="mt-3">
+              <label for="conclusao_item" class="text-[#7A7A7A]">Conclusão de Avaliação</label>
+              <div class="flex items-center">
+                <input type="radio" id="troca" name="conclusao_item" value="2" class="mr-2">
+                <label for="troca" class="text-[#444444]">Aprovado</label>
+              </div>
+              <div class="flex items-center">
+                <input type="radio" id="doacao" name="conclusao_item" value="3" class="mr-2">
+                <label for="doacao" class="text-[#444444]">Reprovado</label>
+              </div>
             </div>
-          </div>
 
-          <div class="mt-3">
-            <label for="descricao_item" class="block leading-6 text-[#444444]">Descrição do Item</label>
-            <div class="mt-2">
-              <textarea id="descricao_item" name="descricao_item" placeholder="Informe a descrição do item"
-                class="block w-full outline-none rounded-md border-0 py-1.5 text-[#444444] shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-[#7A7A7A] focus:ring-2 focus:ring-inset focus:ring-[#F58220] sm:leading-6"
-                style="padding: 6px 12px;"></textarea>
+            <div class="mt-3">
+              Critérios:<br />
+              Faixa de valor | Condição<br />
+              0R$-50R$ = 2 pontos | Ruim = Não aprovado<br />
+              50R$-100R$ = 4 pontos | Mediano = 5<br />
+              100R$-500R$ = 6 pontos | Bom = 10 pontos<br />
+              500R$-1000+ = 8 pontos | Excelente = 15 pontos</p>
+
+              <div class="mt-3 flex items-center">
+                <p class="text-[#444444]">Digite a pontuação de créditos:<br />
+                  
+                <div class="ml-4 flex items-center rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#F58220] w-32">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_19_806)">
+                      <path
+                        d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z"
+                        fill="#417453" />
+                      <path
+                        d="M6.89151 17.1084C6.75401 16.9708 6.68525 16.7958 6.68525 16.5833C6.68525 16.3708 6.75401 16.1958 6.89151 16.0582L7.92276 15.027C7.52276 14.5145 7.21325 13.9458 6.99425 13.3208C6.77525 12.6958 6.66601 12.0333 6.66651 11.3333C6.66651 9.65831 7.24776 8.23957 8.41025 7.07706C9.57276 5.91457 10.9915 5.33331 12.6665 5.33331H18.6665V11.3333C18.6665 13.0083 18.0853 14.427 16.9228 15.5896C15.7602 16.7521 14.3416 17.3333 12.6665 17.3333C11.9665 17.3333 11.307 17.2238 10.688 17.0048C10.069 16.7858 9.50351 16.4765 8.99151 16.077L7.94151 17.1084C7.80401 17.2458 7.62901 17.3145 7.41651 17.3145C7.20401 17.3145 7.02901 17.2458 6.89151 17.1084ZM9.92901 14.0708C10.0665 14.2333 10.2415 14.3116 10.454 14.3056C10.6665 14.2996 10.8478 14.2213 10.9978 14.0708L13.9416 11.1271C14.0916 10.9771 14.1665 10.7991 14.1665 10.5931C14.1665 10.3871 14.0916 10.2088 13.9416 10.0583C13.804 9.92082 13.629 9.85206 13.4165 9.85206C13.204 9.85206 13.029 9.92082 12.8915 10.0583L9.92901 13.0208C9.79151 13.1583 9.72276 13.3303 9.72276 13.5368C9.72276 13.7433 9.79151 13.9213 9.92901 14.0708Z"
+                        fill="white" />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_19_806">
+                        <rect width="24" height="24" fill="white" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+
+                  <input class="outline-none border-0 ml-2 w-full" name="creditos_atribuir" type="number" placeholder="Ex: 1">
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div class="mt-3">
-            <label for="condicao_item" class="block leading-6 text-[#444444]">Condição do Item</label>
-            <div class="mt-2">
-              <textarea id="condicao_item" name="condicao_item" placeholder="Informe a condição do item"
-                class="block w-full outline-none rounded-md border-0 py-1.5 text-[#444444] shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-[#7A7A7A] focus:ring-2 focus:ring-inset focus:ring-[#F58220] sm:leading-6"
-                style="padding: 6px 12px;"></textarea>
+            <div class="mt-4">
+              <p class="text-[#7A7A7A]" style="line-height: 1rem;"><strong class="text-red-500">OBS.:</strong> Caso o
+                item seja <strong class="text-[#417453]">aprovado</strong> será atribuido automaticamente ao remetente
+                dele o crédito informado.</p>
             </div>
-          </div>
 
-          <div class="mt-3 mb-5">
-            <button type="submit" id="send-avaliacao-button"
-              class="flex w-full justify-center rounded-md bg-[#F58220] px-3 py-1.5 leading-6 text-white shadow-sm hover:bg-[#D8711A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">Enviar
-              para Avaliação</button>
-          </div>
+            <div class="mt-3 mb-9">
+              <button type="submit" id="send-avaliacao-button"
+                class="flex w-full justify-center rounded-md bg-[#F58220] px-3 py-1.5 leading-6 text-white shadow-sm hover:bg-[#D8711A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">Confirmar
+                Avaliação</button>
+            </div>
 
-          <!-- <div
+            <!-- <div
             class="flex mt-4  w-full cursor-pointer items-center justify-center py-2 px-4 rounded-md bg-[#F58220] hover:bg-[#D8711A]">
             <span class="ml-3 text-white">Enviar para Avaliação</span>
           </div> -->
+          </div>
         </div>
+      </form>
     </div>
-    </form>
-  </div>
   </div>
 </section>
 <script defer>
   const form = document.querySelector('form');
-  const inputFoto = document.querySelector('#foto_item');
+  let itemID = "{{ item.id }}";
+  let remetenteID = "{{ item.remetente_id }}";
 
   let tokenUser = {};
   let userInfo = {};
@@ -247,7 +257,7 @@
 
           console.log("=> user", data);
 
-          if (data.user.nivel_acesso !== "cliente") {
+          if (data.user.nivel_acesso !== "funcionario") {
             window.location.replace('/menu');
             alert('Erro: Você não tem acesso a essa página');
             return
@@ -281,20 +291,26 @@
     const data = new FormData(form);
     const value = Object.fromEntries(data.entries());
 
-    if (!value.nome_item || !value.descricao_item || !value.condicao_item || !value.tipo_item || !value.quantidade_item || !value.categoria_item) {
-      alert('Por favor, preencha todos os campos do formulário.');
+    if (!value.conclusao_item) {
+      alert('Por favor, selecione uma opção de conclusão de avaliação');
       return;
     }
 
-    // valida se uma imagem foi selecionada
-    console.log(inputFoto.files[0]);
-    if (!inputFoto.files[0]) {
-      alert('Por favor, selecione uma imagem para o item.');
+    if (value.conclusao_item === '2' && !value.creditos_atribuir) {
+      alert('Por favor, digite a quantidade de créditos a ser atribuido ao usuário');
       return;
     }
 
-    console.log(value);
-    sendFormToAvaliation(value);
+    console.log("value.conclusao_item", value.conclusao_item);
+    console.log("value.creditos_atribuir", !value.creditos_atribuir);
+    console.log(value.conclusao_item === 2 && !value.creditos_atribuir);
+
+    const valueData = {
+      ...value,
+      id_item: itemID,
+      id_usuario: remetenteID
+    }
+    sendAvaliation(valueData);
   });
 
   // Função para sair do módulo
@@ -304,38 +320,33 @@
 
   // Função para voltar
   function back() {
-    window.location.replace('/itens_cadastrados');
+    window.location.replace('/avaliacao_itens');
   }
 
   // Função para enviar os dados do formulário para a avaliação
-  async function sendFormToAvaliation(data) {
+  async function sendAvaliation(data) {
     try {
-      const formData = new FormData();
-      formData.append('foto_item', inputFoto.files[0]);
-      formData.append('nome_item', data.nome_item);
-      formData.append('categoria_item', data.categoria_item);
-      formData.append('descricao_item', data.descricao_item);
-      formData.append('condicao_item', data.condicao_item);
-      formData.append('tipo_item', data.tipo_item);
-      formData.append('quantidade_item', data.quantidade_item);
-      formData.append('id_usuario', userInfo.id_usuario);
-
-      fetch('/cadastrar_item', {
+      console.warn(data);
+      const response = await fetch(`/api/avaliarItem`, {
         method: 'POST',
-        body: formData
-      }).then((response) => {
-        console.log(response);
-        if (response.status === 201) {
-          alert('Sucesso:Item enviado para avaliação com sucesso!');
-          window.location.replace('/itens_cadastrados');
-        } else {
-          alert('Erro ao enviar item para avaliação');
-        }
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
       });
+
+      const responseData = await response.json();
+
+      if (responseData.status === 200) {
+        alert('Sucesso:Avaliação enviada com sucesso');
+        window.location.replace('/avaliacao_itens');
+      } else {
+        alert('Erro:Erro ao enviar a confirmação de avaliação');
+      }
 
     } catch (error) {
       console.error(error);
-      alert('Erro ao enviar item para avaliação');
+      alert('Erro ao enviar a confirmação de avaliação');
     }
   }
 

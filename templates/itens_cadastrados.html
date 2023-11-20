@@ -125,10 +125,12 @@
             <tr>
               <th scope="col" class="px-6 py-3 text-center text-white font-regular">
                 Id</th>
-              <th scope="col" class="px-6 py-3 w-[9rem] text-center text-white font-regular">
-                Tipo do Item</th>
-              <th scope="col" class="px-6 py-3 text-left text-white font-regular w-1/3">
-                Item Cadastrado
+              <th scope="col" class="px-6 py-3 w-[7rem] text-center text-white font-regular">
+                Tipo</th>
+              <th scope="col" class="px-6 py-3 text-center text-white font-regular">
+                Categoria</th>
+              <th scope="col" class="px-6 py-3 text-left text-white font-regular">
+                Nome
               </th>
               <th scope="col" class="px-6 py-3 text-left text-white font-regular">
                 Status</th>
@@ -221,24 +223,6 @@
           const tableBody = document.querySelector('[tableBody]');
 
           data.itens.forEach(item => {
-            // <!-- <tr class="border border-[#D9D9D9]">
-            //   <td class="px-6 py-4">
-            //     <div class="text-[#7A7A7A]">1</div>
-            //   </td>
-            //   <td class="px-6 py-4 w-full flex items-center justify-center">
-            //     <div class="w-6 h-6 bg-[#EE43B4] rounded-full">
-            //     </div>
-            //   </td>
-            //   <td class="px-6 py-4">
-            //     <div class="text-[#7A7A7A]">Camiseta</div>
-            //   </td>
-            //   <td class="px-6 py-4">
-            //     <div class="text-[#7A7A7A]">Aprovado</div>
-            //   </td>
-            //   <td class="px-6 py-4  w-full flex items-center justify-center">
-            //     <div class="text-[#7A7A7A] items-center">0</div>
-            //   </td>
-            // </tr> -->
 
             const row = document.createElement('tr');
             row.classList.add('border', 'border-[#D9D9D9]');
@@ -262,9 +246,13 @@
             } else {
               tipoCell.innerHTML = `<div class="w-6 h-6 bg-[#EE43B4] rounded-full"></div>`;
             }
-
             row.appendChild(tipoCell);
 
+            const categoriaCell = document.createElement('td');
+            categoriaCell.classList.add('px-6', 'py-4');
+            categoriaCell.innerHTML = `<div class="text-[#7A7A7A]">${item.categoria}</div>`;
+            row.appendChild(categoriaCell);
+            
             const nomeCell = document.createElement('td');
             nomeCell.classList.add('px-6', 'py-4');
             nomeCell.innerHTML = `<div class="text-[#7A7A7A]">${item.nome_item}</div>`;

@@ -3,7 +3,9 @@ from app import app
 from werkzeug.utils import secure_filename
 import secrets
 import os
+from controller.avaliacao_controller import AvaliacaoItemsController
 from core.util import resource_path
+from model.cadastro_itens import CadastroItens
 
 app.config['UPLOAD_FOLDER'] = resource_path('static/assets/img')
 
@@ -73,6 +75,8 @@ def itens_cadastrados():
 @app.route('/cadastrar_item', methods=['GET', 'POST'])
 def cadastrar_item():
     try:
+        categorias_itens = CadastroItens.pegar_categorias_itens()
+
         # Verificar se o método é POST, ou seja, se o formulário foi submetido
         if request.method == 'POST':
             imagem = request.files['foto_item']
@@ -85,10 +89,9 @@ def cadastrar_item():
             imagem.save(os.path.join(app.config['UPLOAD_FOLDER'], imagemName))
             return ItemController.cadastrar_item_troca_doacao(request.form, imagemName)
     
-        return render_template('cadastrar_item.html')
+        return render_template('cadastrar_item.html', categorias_itens=categorias_itens)
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)})
-
 
 @app.route('/api/itensCadastrados')
 def api_itens_cadastrados():
@@ -98,6 +101,41 @@ def api_itens_cadastrados():
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)})
 # -- fim
+
+
+# -- inicio Avaliação de itens + gestao de créditos
+@app.route('/avaliacao_itens')
+def avaliacao_itens():
+    return render_template('avaliacao_itens.html')
+
+@app.route('/api/avaliacaoItens')
+def api_avaliacao_itens():
+    try:
+        return AvaliacaoItemsController.pegar_itens_avaliacao()
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)})
+
+@app.route('/avaliar_item/<id>')
+def avaliar_item(id):
+    item = AvaliacaoItemsController.pegar_item_avaliacao_por_id(id)[0]
+    print(item)
+    return render_template('avaliar_item.html', item=item)
+
+@app.route('/api/avaliarItem', methods=['POST'])
+def api_avaliar_item():
+    try:
+        data = request.get_json()
+        return AvaliacaoItemsController.avaliar_item(data)
+    except Exception as e:
+        print(e)
+        return jsonify({'status': 'error', 'message': str(e)})
+# -- fim
+
+# -- inicio catalogo de itens
+@app.route('/catalogo_itens')
+def catalogo_itens():
+    return render_template('catalogo_itens.html')
+
 
 @app.route('/home')
 def home():

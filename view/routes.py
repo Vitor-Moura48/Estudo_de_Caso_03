@@ -1,9 +1,13 @@
-from flask import Flask, request, jsonify, render_template, make_response
+from flask import Flask, request, jsonify, render_template, make_response, session
 from app import app
+import secrets
 
 from controller.autenticacao_controller import AutenticacaoController
 
 # pyinstaller -w -F --add-data "templates;templates" --add-data "static;static" --add-data "database;database" app.py
+
+secret_key = secrets.token_hex(16)
+app.secret_key = secret_key
 
 @app.route('/')
 def index():
@@ -15,9 +19,26 @@ def login():
     try:
         if request.method == 'POST':
             data = request.get_json()
+            session['username'] = data.get('username')
             return AutenticacaoController.autenticar_usuario(data)
 
         return render_template('auth/login.html')
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)})
+
+@app.route('/api/userInfo')
+def userInfo():
+    try:
+        token = request.args.get('token')
+        return AutenticacaoController.getUserInfo(token)
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)})
+
+@app.route('/api/logout')
+def logout():
+    try:
+        token = request.args.get('token')
+        return AutenticacaoController.logout(token)
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)})
 
@@ -37,6 +58,10 @@ def register():
 @app.route('/menu')
 def menu():
     return render_template('menu.html')
+
+@app.route('/itens_cadastrados')
+def itens_cadastrados():
+    return render_template('itens_cadastrados.html')
 
 @app.route('/home')
 def home():

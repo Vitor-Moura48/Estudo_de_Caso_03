@@ -1,2 +1,2 @@
-id;usuario;nome_completo;senha;creditos;nivel_acesso
-1;otton;otton;1234;0;cliente
+id;usuario;nome_completo;senha;creditos;nivel_acesso;token
+1;otton;otton;1234;0;cliente;wa5LGwNv6ouWNw5-_Qr5EA

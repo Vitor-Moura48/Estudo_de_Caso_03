@@ -7,56 +7,207 @@
     cursor: pointer;
     min-width: 8.85rem;
     min-height: 7.6rem;
-    /* background-color: red; */
+    /* background-color: #ffffff; */
     box-shadow: 0px 1px 3px 2px rgba(0, 0, 0, 0.10);
     & + [card-options] {
       margin-left: 1.2rem;
     }
+
+    & + div[todos_acessos] {
+      margin-left: 1.2rem;
+    }
   }
+
+  [todos_acessos], [visitant], [cliente], [funcionario], [gerente] {
+    display: none;
+  }
+
 </style>
 {% endblock %}
 
 {% block content %}
-  <div class="flex min-h-full min-w-full items-center justify-center">
-    <div class="flex flex-col items-center justify-center">
-      <h1 class="text-[1.5rem] text-[#F58220] font-semiBold">Seja Bem vindo ao Convenience Swap</h1>
-      <p class="text-[1.2rem] text-[#7A7A7A] font-regular mt-2">Escolha uma das opções abaixo para continuar</p>
+  <section class="flex flex-col min-h-full min-w-full">
 
-      <div class="flex justify-center items-center mt-8">
+    <header todos_acessos class="w-full py-2 bg-[#FFE7D3]">
+      <div class="flex max-w-6xl my-0 mx-auto px-8 items-center justify-between">
 
-        <!-- VISITANTE -->
-        <div card-options visitant class="flex flex-col items-center justify-center rounded-lg py-6 px-7 hover:bg-[#EEEEEE]">
-          <svg width="29" height="31" viewBox="0 0 29 31" fill="red" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18.8214 19.9286V22.1429H21.0357V19.9286H18.8214ZM5.952 0.243571L0.416286 4.67214C0.0487142 4.96443 0 5.46929 0 5.91214V9.96428C0 11.2109 0.411857 12.3601 1.10714 13.2857V29.8929C1.10714 30.1865 1.22379 30.4681 1.43142 30.6757C1.63905 30.8834 1.92065 31 2.21429 31H5.53571V18.8214C5.53571 18.5278 5.65236 18.2462 5.85999 18.0386C6.06762 17.8309 6.34923 17.7143 6.64286 17.7143H13.2857C13.5793 17.7143 13.861 17.8309 14.0686 18.0386C14.2762 18.2462 14.3929 18.5278 14.3929 18.8214V31H26.5714C26.8651 31 27.1467 30.8834 27.3543 30.6757C27.5619 30.4681 27.6786 30.1865 27.6786 29.8929V13.2857C28.3739 12.3601 28.7857 11.2109 28.7857 9.96428V5.90329C28.7857 5.46043 28.737 4.96443 28.3694 4.67214L22.8337 0.243571C22.6377 0.0863422 22.3941 0.000447605 22.1429 0H6.64286C6.39161 0.000447605 6.14798 0.0863422 5.952 0.243571ZM2.21429 9.96428V6.64286H8.85714V9.96428C8.85714 10.8452 8.50721 11.69 7.88432 12.3129C7.26143 12.9358 6.41661 13.2857 5.53571 13.2857C4.65482 13.2857 3.81 12.9358 3.18711 12.3129C2.56422 11.69 2.21429 10.8452 2.21429 9.96428ZM11.0714 9.96428V6.64286H17.7143V9.96428C17.7143 10.8452 17.3644 11.69 16.7415 12.3129C16.1186 12.9358 15.2738 13.2857 14.3929 13.2857C13.512 13.2857 12.6671 12.9358 12.0443 12.3129C11.4214 11.69 11.0714 10.8452 11.0714 9.96428ZM19.9286 9.96428V6.64286H26.5714V9.96428C26.5714 10.8452 26.2215 11.69 25.5986 12.3129C24.9757 12.9358 24.1309 13.2857 23.25 13.2857C22.3691 13.2857 21.5243 12.9358 20.9014 12.3129C20.2785 11.69 19.9286 10.8452 19.9286 9.96428ZM4.2625 4.42857L7.03036 2.21429H10.0307L9.20036 4.42857H4.2625ZM11.563 4.42857L12.3934 2.21429H16.3636L17.1009 4.42857H11.563ZM18.6974 2.21429H21.7531L24.521 4.42857H19.4348L18.6974 2.21429ZM16.6071 18.8214C16.6071 18.5278 16.7238 18.2462 16.9314 18.0386C17.139 17.8309 17.4207 17.7143 17.7143 17.7143H22.1429C22.4365 17.7143 22.7181 17.8309 22.9257 18.0386C23.1334 18.2462 23.25 18.5278 23.25 18.8214V23.25C23.25 23.5436 23.1334 23.8252 22.9257 24.0329C22.7181 24.2405 22.4365 24.3571 22.1429 24.3571H17.7143C17.4207 24.3571 17.139 24.2405 16.9314 24.0329C16.7238 23.8252 16.6071 23.5436 16.6071 23.25V18.8214ZM7.75 31H12.1786V19.9286H7.75V31Z" fill="#444444"/>
-          </svg>            
-          <span class="text-[#444444] mt-4 text-[1rem]">Explorar Loja</span>
+        <div class="flex items-center">
+          <div class="flex items-center justify-center w-12 h-12 rounded-full bg-[#FFCA9D]">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 0.5C18.3514 0.5 23.5 5.64855 23.5 12C23.504 14.6541 22.5862 17.2272 20.9033 19.2795L20.9263 19.3048L20.7745 19.4336C19.6961 20.7092 18.3521 21.734 16.8366 22.4363C15.321 23.1387 13.6704 23.5017 12 23.5C8.6075 23.5 5.56001 22.0314 3.45551 19.6969L3.22551 19.4324L3.07371 19.3059L3.09671 19.2783C1.41398 17.2264 0.496127 14.6537 0.500012 12C0.500012 5.64855 5.64856 0.5 12 0.5ZM12 17.75C9.861 17.75 7.92785 18.4308 6.48805 19.3657C8.07769 20.559 10.0123 21.2028 12 21.2C13.9877 21.2028 15.9223 20.559 17.5119 19.3657C15.8666 18.3119 13.9539 17.7512 12 17.75ZM12 2.8C10.2687 2.79995 8.57253 3.28842 7.10643 4.20927C5.64034 5.13011 4.46383 6.44596 3.71214 8.00555C2.96045 9.56515 2.66408 11.3052 2.85711 13.0257C3.05013 14.7462 3.72471 16.3773 4.80331 17.7316C6.66746 16.3941 9.21125 15.45 12 15.45C14.7887 15.45 17.3325 16.3941 19.1967 17.7316C20.2753 16.3773 20.9499 14.7462 21.1429 13.0257C21.3359 11.3052 21.0395 9.56515 20.2879 8.00555C19.5362 6.44596 18.3597 5.13011 16.8936 4.20927C15.4275 3.28842 13.7313 2.79995 12 2.8ZM12 5.1C13.22 5.1 14.39 5.58464 15.2527 6.44731C16.1154 7.30997 16.6 8.48 16.6 9.7C16.6 10.92 16.1154 12.09 15.2527 12.9527C14.39 13.8154 13.22 14.3 12 14.3C10.78 14.3 9.60998 13.8154 8.74731 12.9527C7.88464 12.09 7.4 10.92 7.4 9.7C7.4 8.48 7.88464 7.30997 8.74731 6.44731C9.60998 5.58464 10.78 5.1 12 5.1ZM12 7.4C11.39 7.4 10.805 7.64232 10.3737 8.07365C9.94232 8.50499 9.7 9.09 9.7 9.7C9.7 10.31 9.94232 10.895 10.3737 11.3263C10.805 11.7577 11.39 12 12 12C12.61 12 13.195 11.7577 13.6263 11.3263C14.0577 10.895 14.3 10.31 14.3 9.7C14.3 9.09 14.0577 8.50499 13.6263 8.07365C13.195 7.64232 12.61 7.4 12 7.4Z" fill="#417453"/>
+            </svg>
+          </div>
+          <p nome_usuario class="ml-2 text-[#444444]">Usuário</p>
         </div>
-
-        <div card-options visitant onclick="window.location.replace('/login')" card-options class="flex flex-col items-center justify-center rounded-lg py-6 px-7 bg-[#F58220] hover:bg-[#D8711A]">
-          <svg width="27" height="31" viewBox="0 0 27 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M3.85714 13.5625V9.6875C3.85714 7.11822 4.87308 4.65416 6.68147 2.8374C8.48986 1.02064 10.9426 0 13.5 0C16.0574 0 18.5101 1.02064 20.3185 2.8374C22.1269 4.65416 23.1429 7.11822 23.1429 9.6875V13.5625C24.1658 13.5625 25.1469 13.9708 25.8703 14.6975C26.5936 15.4242 27 16.4098 27 17.4375V27.125C27 28.1527 26.5936 29.1383 25.8703 29.865C25.1469 30.5917 24.1658 31 23.1429 31H3.85714C2.83417 31 1.85309 30.5917 1.12973 29.865C0.406376 29.1383 0 28.1527 0 27.125V17.4375C0 16.4098 0.406376 15.4242 1.12973 14.6975C1.85309 13.9708 2.83417 13.5625 3.85714 13.5625ZM19.2857 9.6875V13.5625H7.71429V9.6875C7.71429 8.14593 8.32385 6.6675 9.40888 5.57744C10.4939 4.48739 11.9655 3.875 13.5 3.875C15.0345 3.875 16.5061 4.48739 17.5911 5.57744C18.6762 6.6675 19.2857 8.14593 19.2857 9.6875Z" fill="white"/>
+        
+        <div class="flex items-center">
+          <svg width="24" height="24" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="9" cy="9" r="9" fill="#417453"/>
+            <path d="M5.16875 12.8313C5.06563 12.7281 5.01406 12.5969 5.01406 12.4375C5.01406 12.2781 5.06563 12.1469 5.16875 12.0437L5.94219 11.2703C5.64219 10.8859 5.41006 10.4594 5.24581 9.99062C5.08156 9.52187 4.99963 9.025 5 8.5C5 7.24375 5.43594 6.17969 6.30781 5.30781C7.17969 4.43594 8.24375 4 9.5 4H14V8.5C14 9.75625 13.5641 10.8203 12.6922 11.6922C11.8203 12.5641 10.7563 13 9.5 13C8.975 13 8.48038 12.9179 8.01613 12.7536C7.55188 12.5894 7.12775 12.3574 6.74375 12.0578L5.95625 12.8313C5.85313 12.9344 5.72188 12.9859 5.5625 12.9859C5.40313 12.9859 5.27188 12.9344 5.16875 12.8313ZM7.44688 10.5531C7.55 10.675 7.68125 10.7337 7.84063 10.7292C8 10.7247 8.13594 10.666 8.24844 10.5531L10.4563 8.34531C10.5688 8.23281 10.625 8.09931 10.625 7.94481C10.625 7.79031 10.5688 7.65663 10.4563 7.54375C10.3531 7.44063 10.2219 7.38906 10.0625 7.38906C9.90313 7.38906 9.77188 7.44063 9.66875 7.54375L7.44688 9.76562C7.34375 9.86875 7.29219 9.99775 7.29219 10.1526C7.29219 10.3075 7.34375 10.441 7.44688 10.5531Z" fill="white"/>
           </svg>
-          <span class="text-white mt-4">Fazer Login</span>
+          
+          <p creditos_usuario class="ml-2 text-[#417453]">?? Ecoins</p>
         </div>
-        <!-- VISITANTE END-->
+      </div>
+    </header>
+  
+    <div class="flex flex-1 min-h-full min-w-full items-center justify-center">
+      <div class="flex flex-col items-center justify-center">
+        <img class="mx-auto h-[5rem] w-auto mb-2" src="{{ url_for('static', filename='assets/favicon.png') }}"
+      alt="Convenience Swap">
+        <h1 visitant class="text-[1.5rem] text-[#417453] font-semiBold">Seja Bem vindo ao Convenience Swap</h1>
+        <h1 cliente cliente_usuario class="text-[1.5rem] text-[#417453] font-semiBold">Título</h1>
+        <h1 funcionario funcionario_usuario class="text-[1.5rem] text-[#417453] font-semiBold">Título</h1>
+        <h1 gerente gerente_usuario class="text-[1.5rem] text-[#417453] font-semiBold">Título</h1>
+        
+        <p visitant class="text-[1.2rem] text-[#7A7A7A] font-regular mt-2">Escolha uma das opções abaixo para continuar</p>
+        <p todos_acessos class="text-[1.2rem] text-[#7A7A7A] font-regular mt-2">Qual môdulo você deseja acessar?</p>
 
-        <!-- CLIENTE -->
-        
-        
+        <div class="flex justify-center items-center mt-8">
+  
+          <!-- VISITANTE -->
+          <div card-options visitant cliente class="flex flex-col items-center justify-center rounded-lg py-6 px-7 bg-white hover:bg-[#EEEEEE]">
+            <svg width="29" height="31" viewBox="0 0 29 31" fill="red" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18.8214 19.9286V22.1429H21.0357V19.9286H18.8214ZM5.952 0.243571L0.416286 4.67214C0.0487142 4.96443 0 5.46929 0 5.91214V9.96428C0 11.2109 0.411857 12.3601 1.10714 13.2857V29.8929C1.10714 30.1865 1.22379 30.4681 1.43142 30.6757C1.63905 30.8834 1.92065 31 2.21429 31H5.53571V18.8214C5.53571 18.5278 5.65236 18.2462 5.85999 18.0386C6.06762 17.8309 6.34923 17.7143 6.64286 17.7143H13.2857C13.5793 17.7143 13.861 17.8309 14.0686 18.0386C14.2762 18.2462 14.3929 18.5278 14.3929 18.8214V31H26.5714C26.8651 31 27.1467 30.8834 27.3543 30.6757C27.5619 30.4681 27.6786 30.1865 27.6786 29.8929V13.2857C28.3739 12.3601 28.7857 11.2109 28.7857 9.96428V5.90329C28.7857 5.46043 28.737 4.96443 28.3694 4.67214L22.8337 0.243571C22.6377 0.0863422 22.3941 0.000447605 22.1429 0H6.64286C6.39161 0.000447605 6.14798 0.0863422 5.952 0.243571ZM2.21429 9.96428V6.64286H8.85714V9.96428C8.85714 10.8452 8.50721 11.69 7.88432 12.3129C7.26143 12.9358 6.41661 13.2857 5.53571 13.2857C4.65482 13.2857 3.81 12.9358 3.18711 12.3129C2.56422 11.69 2.21429 10.8452 2.21429 9.96428ZM11.0714 9.96428V6.64286H17.7143V9.96428C17.7143 10.8452 17.3644 11.69 16.7415 12.3129C16.1186 12.9358 15.2738 13.2857 14.3929 13.2857C13.512 13.2857 12.6671 12.9358 12.0443 12.3129C11.4214 11.69 11.0714 10.8452 11.0714 9.96428ZM19.9286 9.96428V6.64286H26.5714V9.96428C26.5714 10.8452 26.2215 11.69 25.5986 12.3129C24.9757 12.9358 24.1309 13.2857 23.25 13.2857C22.3691 13.2857 21.5243 12.9358 20.9014 12.3129C20.2785 11.69 19.9286 10.8452 19.9286 9.96428ZM4.2625 4.42857L7.03036 2.21429H10.0307L9.20036 4.42857H4.2625ZM11.563 4.42857L12.3934 2.21429H16.3636L17.1009 4.42857H11.563ZM18.6974 2.21429H21.7531L24.521 4.42857H19.4348L18.6974 2.21429ZM16.6071 18.8214C16.6071 18.5278 16.7238 18.2462 16.9314 18.0386C17.139 17.8309 17.4207 17.7143 17.7143 17.7143H22.1429C22.4365 17.7143 22.7181 17.8309 22.9257 18.0386C23.1334 18.2462 23.25 18.5278 23.25 18.8214V23.25C23.25 23.5436 23.1334 23.8252 22.9257 24.0329C22.7181 24.2405 22.4365 24.3571 22.1429 24.3571H17.7143C17.4207 24.3571 17.139 24.2405 16.9314 24.0329C16.7238 23.8252 16.6071 23.5436 16.6071 23.25V18.8214ZM7.75 31H12.1786V19.9286H7.75V31Z" fill="#444444"/>
+            </svg>            
+            <span class="text-[#444444] mt-4 text-[1rem]">Explorar Loja</span>
+          </div>
+  
+          <div card-options visitant onclick="window.location.replace('/login')" card-options class="flex flex-col items-center justify-center rounded-lg py-6 px-7 bg-[#F58220] hover:bg-[#D8711A]">
+            <svg width="27" height="31" viewBox="0 0 27 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M3.85714 13.5625V9.6875C3.85714 7.11822 4.87308 4.65416 6.68147 2.8374C8.48986 1.02064 10.9426 0 13.5 0C16.0574 0 18.5101 1.02064 20.3185 2.8374C22.1269 4.65416 23.1429 7.11822 23.1429 9.6875V13.5625C24.1658 13.5625 25.1469 13.9708 25.8703 14.6975C26.5936 15.4242 27 16.4098 27 17.4375V27.125C27 28.1527 26.5936 29.1383 25.8703 29.865C25.1469 30.5917 24.1658 31 23.1429 31H3.85714C2.83417 31 1.85309 30.5917 1.12973 29.865C0.406376 29.1383 0 28.1527 0 27.125V17.4375C0 16.4098 0.406376 15.4242 1.12973 14.6975C1.85309 13.9708 2.83417 13.5625 3.85714 13.5625ZM19.2857 9.6875V13.5625H7.71429V9.6875C7.71429 8.14593 8.32385 6.6675 9.40888 5.57744C10.4939 4.48739 11.9655 3.875 13.5 3.875C15.0345 3.875 16.5061 4.48739 17.5911 5.57744C18.6762 6.6675 19.2857 8.14593 19.2857 9.6875Z" fill="white"/>
+            </svg>
+            <span class="text-white mt-4">Fazer Login</span>
+          </div>
+          <!-- VISITANTE END-->
+          
+          <div todos_acessos>
+            <div card-options cliente funcionario gerente onclick="logout(tokenUser)" class="flex flex-col items-center justify-center rounded-lg py-6 px-7 bg-[#FFD1D1] hover:bg-[#FFADAD]">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19.8038 2.11458C18.0381 2.11458 16.6134 2.11458 15.4935 2.2657C14.331 2.4207 13.352 2.75654 12.5744 3.53283C11.8975 4.21095 11.554 5.04408 11.3744 6.02316C11.2 6.97512 11.1665 8.13891 11.1587 9.5365C11.1573 9.79342 11.2581 10.0404 11.4388 10.223C11.6195 10.4057 11.8654 10.509 12.1223 10.5104C12.3792 10.5118 12.6262 10.411 12.8088 10.2303C12.9915 10.0496 13.0948 9.80376 13.0962 9.54683C13.104 8.13504 13.1401 7.134 13.2796 6.3732C13.4152 5.64212 13.631 5.21716 13.9448 4.90329C14.3026 4.5455 14.8051 4.31299 15.7532 4.18512C16.7284 4.05466 18.0213 4.05208 19.8749 4.05208H21.1665C23.0214 4.05208 24.3143 4.05466 25.2895 4.18512C26.2376 4.31299 26.7388 4.54679 27.0979 4.90329C27.4544 5.26108 27.6869 5.76225 27.8147 6.71162C27.9465 7.68554 27.9478 8.97979 27.9478 10.8333V21.1667C27.9478 23.0202 27.9465 24.3132 27.8147 25.2897C27.6869 26.2377 27.4544 26.7389 27.0966 27.0967C26.7388 27.4545 26.2376 27.687 25.2895 27.8149C24.3143 27.9453 23.0214 27.9479 21.1665 27.9479H19.8749C18.0213 27.9479 16.7284 27.9453 15.7519 27.8149C14.8051 27.687 14.3026 27.4532 13.9448 27.0967C13.631 26.7815 13.4152 26.3579 13.2796 25.6268C13.1401 24.866 13.104 23.865 13.0962 22.4532C13.0955 22.3259 13.0698 22.2001 13.0205 22.0828C12.9712 21.9656 12.8992 21.8591 12.8088 21.7697C12.7184 21.6802 12.6112 21.6094 12.4934 21.5613C12.3756 21.5133 12.2495 21.4889 12.1223 21.4896C11.9951 21.4903 11.8692 21.516 11.752 21.5653C11.6347 21.6146 11.5283 21.6865 11.4388 21.777C11.3493 21.8674 11.2785 21.9746 11.2305 22.0924C11.1824 22.2102 11.158 22.3363 11.1587 22.4635C11.1665 23.8611 11.2 25.0249 11.3744 25.9768C11.5552 26.9559 11.8975 27.789 12.5757 28.4672C13.352 29.2447 14.3323 29.578 15.4948 29.7356C16.6134 29.8854 18.0381 29.8854 19.8038 29.8854H21.2376C23.0046 29.8854 24.428 29.8854 25.5479 29.7356C26.7104 29.578 27.6895 29.2447 28.467 28.4672C29.2446 27.6896 29.5779 26.7105 29.7355 25.548C29.8853 24.4281 29.8853 23.0034 29.8853 21.2377V10.7623C29.8853 8.99658 29.8853 7.57187 29.7355 6.45199C29.5792 5.28949 29.2446 4.31041 28.467 3.53283C27.6895 2.75525 26.7104 2.42199 25.5479 2.2657C24.428 2.11458 23.0033 2.11458 21.2376 2.11458H19.8038Z" fill="#FF3838"/>
+                <path d="M19.8749 15.0312C20.1318 15.0312 20.3782 15.1333 20.5599 15.315C20.7416 15.4967 20.8437 15.7431 20.8437 16C20.8437 16.2569 20.7416 16.5033 20.5599 16.685C20.3782 16.8667 20.1318 16.9687 19.8749 16.9687H5.70145L8.23441 19.1387C8.42967 19.3059 8.55053 19.5438 8.57039 19.8001C8.59026 20.0564 8.5075 20.3101 8.34032 20.5053C8.17315 20.7006 7.93525 20.8215 7.67897 20.8413C7.42268 20.8612 7.16901 20.7784 6.97374 20.6112L2.45291 16.7362C2.34656 16.6453 2.26117 16.5324 2.20263 16.4053C2.14408 16.2782 2.11377 16.1399 2.11377 16C2.11377 15.8601 2.14408 15.7218 2.20263 15.5947C2.26117 15.4676 2.34656 15.3547 2.45291 15.2637L6.97374 11.3887C7.07043 11.306 7.18247 11.243 7.30347 11.2036C7.42447 11.1641 7.55207 11.1488 7.67897 11.1587C7.80587 11.1685 7.92959 11.2032 8.04306 11.2609C8.15654 11.3185 8.25755 11.398 8.34032 11.4947C8.4231 11.5913 8.48602 11.7034 8.5255 11.8244C8.56497 11.9454 8.58023 12.073 8.57039 12.1999C8.56056 12.3268 8.52582 12.4505 8.46818 12.564C8.41053 12.6775 8.33109 12.7785 8.23441 12.8612L5.70274 15.0312H19.8749Z" fill="#FF3838"/>
+              </svg>
+                
+              <span class="text-[#FF3838] mt-4">Sair da Conta</span>
+            </div>
+          </div>
+  
+        </div>
       </div>
     </div>
-  </div>
-  <script>
-    const user = localStorage.getItem('user');
-    const userLogged = JSON.parse(user);
+  </section>
+  <script defer>
     const visitant = document.querySelectorAll('[visitant]');
+    const todosAcessos = document.querySelectorAll('[todos_acessos]');
+    let tokenUser = {};
+  
+    init();
 
-    console.warn('=> userLogged', userLogged);
+    function init() {
 
-    if (!userLogged) {
+    const userToken = JSON.parse(localStorage.getItem('userToken'));
+    let userInfo = {};
+
+    console.warn('=> userLogged', userToken);
+
+    console.warn("Iniciando...");
+    if (userToken?.token) {
+      getUserLogged(userToken.token);
+      tokenUser = userToken.token;
+    } else {
       visitant.forEach(element => {
         element.style.display = 'flex';
       });
+    }
+
+    // Função para pegar o usuário logado
+    async function getUserLogged(token) {
+      try {
+        const response = await fetch(`/api/userInfo?token=${token}`);
+        const data = await response.json();
+        console.warn('=> data', data);
+
+        if (data.status === 200) {
+          userInfo = data.user;
+          setUserInfo();
+        } else {
+          console.log(data.message)
+          localStorage.removeItem('userToken');
+          window.location.replace('/menu');
+        }
+
+        return data;
+      } catch (error) {
+        alert('Erro ao buscar usuário logado');
+      }
+    }
+
+
+    // Função para setar as informações do usuário logado
+    function setUserInfo() {
+      const nomeUsuario = document.querySelector('[nome_usuario]');
+      const creditosUsuario = document.querySelector('[creditos_usuario]');
+      const cliente = document.querySelectorAll('[cliente]');
+      const clienteUsuario = document.querySelector('[cliente_usuario]');
+      const funcionario = document.querySelectorAll('[funcionario]');
+      const funcionarioUsuario = document.querySelector('[funcionario_usuario]');
+      const gerente = document.querySelectorAll('[gerente]');
+      const gerenteUsuario = document.querySelector('[gerente_usuario]');
+
+      visitant.forEach(element => {
+        element.style.display = 'none';
+      });
+
+      todosAcessos.forEach(element => {
+        element.style.display = 'block';
+      });
+
+      // Verifica o nivel de acesso
+      if (userInfo.nivel_acesso === 'cliente') {
+        cliente.forEach(element => {
+          element.style.display = 'flex';
+        });
+        clienteUsuario.innerHTML = `Seja Bem-vindo(a) Cliente \b <span class="bold text-[#F58220]">${userInfo.nome}</span>\b ao Convenience Swap`;
+      }
+
+      if (userInfo.nivel_acesso === 'funcionario') {
+        funcionario.forEach(element => {
+          element.style.display = 'flex';
+        });
+        funcionarioUsuario.innerHTML = `Seja Bem-vindo(a) Funcionário \b <span class="bold text-[#F58220]">${userInfo.nome}</span>\b ao Convenience Swap`;
+      }
+
+      if (userInfo.nivel_acesso === 'gerente') {
+        gerente.forEach(element => {
+          element.style.display = 'flex';
+        });
+        gerenteUsuario.innerHTML = `Seja Bem-vindo(a) Gerente \b <span class="bold text-[#F58220]">${userInfo.nome}</span>\b ao Convenience Swap`;
+      }
+
+      nomeUsuario.innerHTML = userInfo.nome;
+      creditosUsuario.innerHTML = `${userInfo.creditos} Ecoins`;
+    }
+  }
+
+  // Função para deslogar o usuário
+  async function logout(token) {
+      try {
+        const response = await fetch(`/api/logout?token=${token}`);
+        const data = await response.json();
+        console.warn('=> data', data);
+
+        if (data.status === 200) {
+          localStorage.removeItem('userToken');
+          alert('Sucesso:Usuário deslogado com sucesso');
+          window.location.replace('/menu');
+        } else {
+          console.log(data.message)
+        }
+
+        return data;
+      } catch (error) {
+        alert('Erro ao buscar usuário logado');
+      }
     }
 
   </script>

@@ -5,8 +5,10 @@ from PyQt6.QtWebEngineWidgets import QWebEngineView
 from PyQt6.QtWebEngineCore import *
 from PyQt6.QtCore import QUrl
 import socket
+import json
 
 from core.util import resource_path
+from model.autenticacao import Autenticacao
 
 DEBUG_PORT = '5588'
 DEBUG_URL = f'http://127.0.0.1:{DEBUG_PORT}'
@@ -69,7 +71,6 @@ class WebPage(QWebEnginePage):
         msg_box.exec()
 
 
-
 def init_gui(application, port=0, width=800, height=600,
              window_title="Suricato", icon=resource_path("appicon.png"), router='splash', argv=None, inspector_mode=False):
     
@@ -106,7 +107,7 @@ def init_gui(application, port=0, width=800, height=600,
 
     # Definir o caminho para o armazenamento local
     # webView.settings().setLocalStoragePath(os.path.abspath("database"))
-
+    
     webView.settings().setAttribute(QWebEngineSettings.WebAttribute.LocalContentCanAccessRemoteUrls, True)
 
     # # Remove o context menu
@@ -116,8 +117,31 @@ def init_gui(application, port=0, width=800, height=600,
 
     # WebPage Level
     page = WebPage(f"http://localhost:{port}/{router}")
+
+    # Se a corta for /menu deve da um localstorage.setItem('token', token)
+    autenticacao = Autenticacao()
+
+    def handleLoadFinished():
+        token = autenticacao.getToken()
+        print(f"=====> Token: {token}")
+
+        if token:
+            data = {"token": token}
+            json_data = json.dumps(data)
+
+            js_code = f"""
+            localStorage.setItem('userToken', '{json_data}');
+
+            init();
+            """
+
+            page.runJavaScript(js_code)
+
+    webView.loadFinished.connect(handleLoadFinished)
+
     page.home()
     webView.setPage(page)
+
 
     # Inspector Level
     if inspector_mode:
@@ -126,6 +150,11 @@ def init_gui(application, port=0, width=800, height=600,
         inspector.settings().setAttribute(QWebEngineSettings.WebAttribute.LocalContentCanAccessRemoteUrls, True)
         inspector.load(QtCore.QUrl("http://localhost:{}".format(DEBUG_PORT)))
         inspector.page().profile().setHttpUserAgent("Chrome/88.0.4324.182")
+
+        # prevenir que o log do inspector seja apagado
+        inspector.page().profile().setPersistentCookiesPolicy(QWebEngineProfile.PersistentCookiesPolicy.NoPersistentCookies)
+        inspector.page().profile().setPersistentStoragePath(os.path.abspath("database"))
+
         inspector.setWindowIcon(QtGui.QIcon(resource_path("static/assets/webinspectoricon.png")))
         page.setDevToolsPage(inspector.page())
         inspector.show()

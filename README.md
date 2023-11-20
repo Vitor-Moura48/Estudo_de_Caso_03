@@ -9,13 +9,13 @@ Antes de começar, certifique-se de ter o Python e o pip instalados em seu siste
 1. Clone este repositório em sua máquina local:
 
    ```
-   git clone https://github.com/Vitor-Moura48/Estudo_de_Caso_01.git
+   git clone https://github.com/Vitor-Moura48/Estudo_de_Caso_03.git
    ```
 
 2. Navegue até o diretório raiz do projeto:
 
    ```
-   cd Estudo_de_Caso_01
+   cd Estudo_de_Caso_03
    ```
 
 3. Instale as dependências do projeto executando o seguinte comando no terminal:
@@ -33,7 +33,7 @@ Para executar o projeto, siga os passos abaixo:
 1. Navegue até o diretório raiz do projeto no terminal:
 
    ```
-   cd /caminho/para/Estudo_de_Caso_01
+   cd /caminho/para/Estudo_de_Caso_03
    ```
 
 2. Execute o seguinte comando no terminal para iniciar o projeto:

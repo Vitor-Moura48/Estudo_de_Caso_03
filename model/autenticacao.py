@@ -27,19 +27,11 @@ class Autenticacao:
             # Usuário já existe
             return ["Aviso:Usuário já existe", 409]
         else:
-            # Obter o último id cadastrado
-            ultimo_id = usuarios_df["id"].max()
-
-            # Verificar se o id é nulo
-            if pd.isna(ultimo_id):
-                # Se for nulo, o id é 1
-                ultimo_id = 1
-            else:
-                # Se não for nulo, incrementar o id
-                ultimo_id += 1
+            # Gerar o id seguindo o formato: 4 numeros aleatorios
+            id_usuario = secrets.token_hex(6)
 
             # Criar o novo registro
-            novo_registro = pd.DataFrame([[ultimo_id, usuario, nome_completo, senha, 0, "cliente", ""]], columns=[
+            novo_registro = pd.DataFrame([[id_usuario, usuario, nome_completo, senha, 0, "cliente", ""]], columns=[
                                          "id", "usuario", "nome_completo", "senha", "creditos", "nivel_acesso", "token"])
 
             # Adicionar o novo registro na planilha
@@ -94,6 +86,12 @@ class Autenticacao:
 
         if usuario_existe:
             # Obter o nome do usuario
+            id_usuario = usuarios_df.loc[usuarios_df["token"]
+                                               == token, "id"].values[0]
+            
+            # o id_usuario é string
+            id_usuario = str(id_usuario)
+                                         
             nome_usuario = usuarios_df.loc[usuarios_df["token"]
                                                == token, "nome_completo"].values[0]
             creditos = usuarios_df.loc[usuarios_df["token"]
@@ -104,7 +102,7 @@ class Autenticacao:
             if isinstance(creditos, np.int64):
                 creditos = int(creditos)
 
-            return [200, "Sucesso:Usuário autenticado com sucesso!", {"nome": nome_usuario, "creditos": creditos, "nivel_acesso": nivel_acesso}]
+            return [200, "Sucesso:Usuário autenticado com sucesso!", {"nome": nome_usuario, "creditos": creditos, "nivel_acesso": nivel_acesso, "id_usuario": id_usuario}]
         else:
             # Usuário não encontrado
             return [404, "Aviso:Usuário não encontrado", {}]

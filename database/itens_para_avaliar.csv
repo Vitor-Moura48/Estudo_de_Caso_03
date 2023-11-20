@@ -1,3 +1,6 @@
-Codigo;Nome;Quantidade;Faixa de Valor;Descricao;Condicao
-3Kvoz;Oculos;1;2400;um bom oculos;Bom
-fP6Of;Lapis;2;50;muito bom;Ruim
+id;foto_anexada;tipo;nome_item;descricao;quantidade;status;condicao;remetente_id;rendimento
+71682;9983f528b67555c9.jpg;3;f;f;1;1;f;1e;0
+92323;73119fece447c04a.jpg;3;m; jbnhb;1;1;vj;1e;0
+82037;37dc763fef50afc3.png;1;uu;kk;1;1;zz;1aae20e73699;0
+99274;67f23dc625da92c4.png;1;nome item;descri item;1;1;bom;1aae20e73699;0
+39632;81a36fe7afea5f31.png;3;d;d;1;1;d;1aae20e73699;0

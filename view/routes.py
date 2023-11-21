@@ -4,6 +4,7 @@ from werkzeug.utils import secure_filename
 import secrets
 import os
 from controller.avaliacao_controller import AvaliacaoItemsController
+from controller.produtos_controller import ProdutosController
 from core.util import resource_path
 from model.cadastro_itens import CadastroItens
 
@@ -118,7 +119,6 @@ def api_avaliacao_itens():
 @app.route('/avaliar_item/<id>')
 def avaliar_item(id):
     item = AvaliacaoItemsController.pegar_item_avaliacao_por_id(id)[0]
-    print(item)
     return render_template('avaliar_item.html', item=item)
 
 @app.route('/api/avaliarItem', methods=['POST'])
@@ -134,7 +134,20 @@ def api_avaliar_item():
 # -- inicio catalogo de itens
 @app.route('/catalogo_itens')
 def catalogo_itens():
-    return render_template('catalogo_itens.html')
+    produtos = ProdutosController.pegar_todos_produtos()
+    print(produtos)
+    # produtos = ''
+    return render_template('catalogo_itens.html', produtos=produtos)
+
+# @app.route('/api/adquirirItem', methods=['POST'])
+# def api_adquirir_item():
+#     try:
+#         data = request.get_json()
+#         return ProdutosController.adquirir_produto(data)
+#     except Exception as e:
+#         return jsonify({'status': 'error', 'message': str(e)})
+
+@app.route('/api/pegarTodosProdutos')
 
 
 @app.route('/home')

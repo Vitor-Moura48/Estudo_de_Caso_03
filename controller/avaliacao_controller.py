@@ -43,7 +43,3 @@ class AvaliacaoItemsController:
         avaliacaoItens = AvaliacaoItens()
 
         return avaliacaoItens.pegar_item_avaliacao_por_id(id_item)
-
-        response = make_response(jsonify({"item": item}), 200)
-        response.headers['Content-Type'] = 'application/json; charset=utf-8'
-        return response

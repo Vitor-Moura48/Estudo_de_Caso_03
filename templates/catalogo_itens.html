@@ -86,7 +86,7 @@
         {% for produto in produtos %}
         <div card-item class="w-[12rem]">
           <img class="w-full h-[50%] object-cover rounded-md"
-            src="{{ url_for('static', filename='assets/img/9983f528b67555c9.jpg') }}" alt="Imagem">
+            src="{{ url_for('static', filename='assets/img/' + produto.foto_anexada) }}" alt="Imagem">
           <div class="mt-2">
 
             <!-- Troca tipo -->

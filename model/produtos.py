@@ -39,6 +39,27 @@ class ProdutoItem:
         # json_itens = json.loads(itens_json)
 
         return itens_json
+    
+    # metodo para cadastrar produto
+    def cadastrar_produto(self, foto_anexada, tipo, categoria_item, nome_item, descricao, quantidade, condicao, valor, remetente_id):
+        # Lendo os dados da planilha de itens para avaliar
+        produtos_df = pd.read_csv(self.arquivo_produtos, sep=';')
+
+        # O id segue segue o padrão: 5 numeros aleatorios
+        produto_id = 'I' + ''.join(random.choice(string.digits) for _ in range(5))
+
+        # Criar o novo registro
+        novo_registro = pd.DataFrame([[produto_id, foto_anexada, tipo, categoria_item, nome_item, descricao, quantidade, condicao, valor, remetente_id]], columns=["id", "foto_anexada", "tipo", "categoria", "nome_item", "descricao", "quantidade", "condicao", "valor", "remetente_id"])
+
+        # Adicionar o novo registro ao final do arquivo
+        produtos_df = pd.concat([produtos_df, novo_registro], ignore_index=True)
+
+        # Salvar o arquivo
+        produtos_df.to_csv(self.arquivo_produtos, index=False, sep=';')
+
+
+        return ["Produto cadastrado com sucesso!", 201]
+
 
     
 

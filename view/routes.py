@@ -131,6 +131,40 @@ def api_avaliar_item():
         return jsonify({'status': 'error', 'message': str(e)})
 # -- fim
 
+# -- Gestão de estoque
+@app.route('/gestao_estoque')
+def gestao_estoque():
+    return render_template('gestao_estoque.html')
+
+@app.route('/cadastrar_produto', methods=['GET', 'POST'])
+def cadastrar_produto():
+    try:
+        categorias_itens = CadastroItens.pegar_categorias_itens()
+
+        # Verificar se o método é POST, ou seja, se o formulário foi submetido
+        if request.method == 'POST':
+            imagem = request.files['foto_item']
+
+            filename = secure_filename(imagem.filename)
+            imagemName = secrets.token_hex(8)
+            _, extensao = os.path.splitext(filename)
+            imagemName = imagemName + extensao
+
+            imagem.save(os.path.join(app.config['UPLOAD_FOLDER'], imagemName))
+            return ProdutosController.cadastrar_produto(request.form, imagemName)
+    
+        return render_template('cadastrar_produto.html', categorias_itens=categorias_itens)
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)})
+
+@app.route('/api/pegarTodosProdutos')
+def api_pegar_todos_produtos():
+    try:
+        return make_response(jsonify({'status': 200, 'itens': ProdutosController.pegar_todos_produtos()}), 200)
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)})
+
+
 # -- inicio catalogo de itens
 @app.route('/catalogo_itens')
 def catalogo_itens():

@@ -12,16 +12,21 @@ class ProdutosController:
         itens = produtos.pegar_todos_produtos()
         return itens
     
-    # Metodo para adiquirir um produto
-    # @staticmethod
-    # def adquirir_produto(id_item, id_comprador):
-    #     produtos = ProdutoItem()
-    #     avaliacao = AvaliacaoItens()
+    @staticmethod
+    def cadastrar_produto(form, foto_item):
+        produtos = ProdutoItem()
 
-    #     item = produtos.pegar_item_por_id(id_item)
-    #     item['status'] = 2
-    #     produtos.atualizar_item(item)
+        categoria_item = form['categoria_item']
+        nome_item = form['nome_item']
+        descricao_item = form['descricao_item']
+        condicao_item = form['condicao_item']
+        tipo_item = form['tipo_item']
+        quantidade_item = form['quantidade_item']
+        id_usuario = form['id_usuario']
+        valor = form['valor_produto']
 
-    #     avaliacao.adicionar_avaliacao_item(id_item, id_comprador)
+        message, status = produtos.cadastrar_produto(nome_item=nome_item, categoria_item=categoria_item, descricao=descricao_item, condicao=condicao_item, tipo=tipo_item, quantidade=quantidade_item, foto_anexada=foto_item, remetente_id=id_usuario, valor=valor)
 
-    #     return True
+        response = make_response(jsonify({"message": message, "status": status}), status)
+        response.headers['Content-Type'] = 'application/json; charset=utf-8'
+        return response

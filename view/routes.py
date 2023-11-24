@@ -7,6 +7,7 @@ from controller.avaliacao_controller import AvaliacaoItemsController
 from controller.produtos_controller import ProdutosController
 from core.util import resource_path
 from model.cadastro_itens import CadastroItens
+from model.relatorios import Relatorios
 
 app.config['UPLOAD_FOLDER'] = resource_path('static/assets/img')
 
@@ -173,15 +174,31 @@ def catalogo_itens():
     # produtos = ''
     return render_template('catalogo_itens.html', produtos=produtos)
 
-# @app.route('/api/adquirirItem', methods=['POST'])
-# def api_adquirir_item():
-#     try:
-#         data = request.get_json()
-#         return ProdutosController.adquirir_produto(data)
-#     except Exception as e:
-#         return jsonify({'status': 'error', 'message': str(e)})
+@app.route('/api/adquirirProduto', methods=['POST'])
+def api_adquirir_item():
+    try:
+        data = request.get_json()
+        token = data['token']
+        id_produto = data['idProduto']
+        return ProdutosController.adquirir_produto(token, id_produto)
+    except Exception as e:
+        print(e)
+        return jsonify({'status': 'error', 'message': str(e)})
+# -- fim
 
-@app.route('/api/pegarTodosProdutos')
+# -- inicio relatorios e estatisticas
+@app.route('/relatorios_estatisticas')
+def relatorios_estatisticas():
+    relatorios_estatisticas = Relatorios()
+    relatorios = relatorios_estatisticas.pegar_relatorio()
+    estatisticos = relatorios_estatisticas.gerar_relatorio_estatistico()
+
+    data = {
+        'relatorios': relatorios,
+        'estatisticos': estatisticos
+    }
+
+    return render_template('relatorios_estatisticas.html', data=data)
 
 
 @app.route('/home')

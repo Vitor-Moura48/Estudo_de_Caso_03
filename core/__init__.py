@@ -9,6 +9,7 @@ import json
 
 from core.util import resource_path
 from model.autenticacao import Autenticacao
+from PyQt6.QtWidgets import QFileDialog
 
 DEBUG_PORT = '5588'
 DEBUG_URL = f'http://127.0.0.1:{DEBUG_PORT}'
@@ -34,6 +35,18 @@ class WebPage(QWebEnginePage):
 
     def home(self):
         self.load(QtCore.QUrl(self.root_url))
+        self.profile().downloadRequested.connect(self.on_downloadRequested)
+
+
+    
+    # @QtCore.pyqtSlot(QWebEngineDownloadItem)
+    def on_downloadRequested(self, download):
+        path, _ = QFileDialog.getSaveFileName(None, "Salvar Arquivo", download.suggestedFileName())
+        if path:
+            dir_name, file_name = os.path.split(path)
+            download.setDownloadDirectory(dir_name)
+            download.setDownloadFileName(file_name)
+            download.accept()
 
     def acceptNavigationRequest(self, url, kind, is_main_frame):
         ready_url = url.toEncoded().data().decode()

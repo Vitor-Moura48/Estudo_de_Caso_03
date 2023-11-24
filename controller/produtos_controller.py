@@ -30,3 +30,19 @@ class ProdutosController:
         response = make_response(jsonify({"message": message, "status": status}), status)
         response.headers['Content-Type'] = 'application/json; charset=utf-8'
         return response
+    
+    # Metodo para adquirir item
+    @staticmethod
+    def adquirir_produto(token: str, id_produto: str):
+        produtos = ProdutoItem()
+
+        print(f"=================== ADQUIRIR PRODUTO ===================")
+        print(f"Token: {token}")
+        print(f"Id do produto: {id_produto}")
+        print(f"=================== ADQUIRIR PRODUTO ===================")
+
+        message, status = produtos.adquirir_produto(token, id_produto)
+        
+        response = make_response(jsonify({"message": message, "status": status}), 200)
+        response.headers['Content-Type'] = 'application/json; charset=utf-8'
+        return response

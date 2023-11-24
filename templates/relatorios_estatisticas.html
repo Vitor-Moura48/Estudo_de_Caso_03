@@ -2,8 +2,21 @@
 
 {% block head %}
 <style>
-  [card-item] {
-    margin: 0.5rem;
+  [card-options] {
+    display: none;
+    cursor: pointer;
+    min-width: 8.85rem;
+    min-height: 7.6rem;
+    /* background-color: #ffffff; */
+    box-shadow: 0px 1px 3px 2px rgba(0, 0, 0, 0.10);
+
+    &+[card-options] {
+      margin-left: 1.2rem;
+    }
+
+    &+div[todos_acessos] {
+      margin-left: 1.2rem;
+    }
   }
 
   [todos_acessos],
@@ -24,13 +37,11 @@
 
       <div class="flex items-center">
         <svg width="26" height="28" viewBox="0 0 26 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M13 0C8.64802 0 5.10828 3.51245 5.10828 7.83089C5.10828 12.1493 8.64802 15.6618 13 15.6618C17.352 15.6618 20.8917 12.1493 20.8917 7.83089C20.8917 3.51245 17.352 0 13 0ZM12.4943 1.87502L11.7796 3.99815L14.9451 3.66907L14.6302 2.6175L15.518 2.86141V4.02803L16.9047 4.11778L16.6335 3.07085L17.3624 2.65196C18.8526 3.88852 19.799 5.74769 19.799 7.83089C19.799 8.83493 19.579 9.78686 19.1844 10.6423L17.5981 10.9087V12.8048C17.2955 13.0803 16.9684 13.3281 16.6208 13.5451L15.94 12.4941L14.6134 12.8531L14.9862 14.2859C14.3422 14.4798 13.6729 14.5781 13 14.5775C11.1173 14.5775 9.41613 13.8224 8.18624 12.6001L9.39792 12.4344L10.212 10.8488L7.61912 9.56248L9.4582 8.00678L7.86043 6.69059L6.22788 7.2305C6.41679 5.0952 7.60304 3.24861 9.32349 2.15139L9.66927 4.89557L12.4943 1.87502ZM14.8546 5.74329L12.6588 7.13936L14.5775 8.83161L15.9632 8.42971L15.8352 10.0797L18.3721 9.44507L17.4127 7.28748L15.8779 7.30863L17.2423 6.1452L14.8546 5.74329H14.8546ZM12.5737 8.17587L11.4011 8.68349L12.2325 9.29695L12.5737 8.17587ZM9.81994 8.36586L9.006 9.32303L11.261 10.8957L9.81994 8.36586ZM13.4477 8.89504L12.6163 10.4394L14.6202 11.7931L13.9167 10.7989L14.7907 9.76234L13.4477 8.89504ZM1.11204 10.5453C0.576739 10.537 0.0288719 11.2135 0.0257152 12.9476C0.0209802 15.6073 -0.238718 16.3581 1.00168 19.366C1.91123 21.5718 2.31911 23.2672 5.22969 24.6372C5.5745 25.8432 5.43688 26.1268 5.20298 27.1575C4.98469 28.1197 7.23194 28.2966 8.87773 27.486C10.6437 26.5301 10.4955 23.8984 10.18 22.1138C9.81314 20.0383 8.65877 19.607 7.65816 18.7205C6.61918 17.2461 6.37739 14.5753 4.69233 13.4979C4.34042 13.2729 2.54518 13.0445 5.01176 19.1568C1.75971 18.3575 2.35207 14.6526 2.1169 11.9096C2.04684 11.0927 1.58433 10.5524 1.11204 10.5452V10.5453ZM24.888 10.5453C24.4157 10.5525 23.9532 11.0927 23.8831 11.9096C23.6479 14.6526 24.2403 18.3575 20.9882 19.1568C23.4549 13.0444 21.6596 13.2729 21.3077 13.4979C19.6226 14.5753 19.3809 17.2461 18.3418 18.7205C17.3413 19.607 16.1868 20.0383 15.82 22.1138C15.5045 23.8984 15.3563 26.5301 17.1223 27.486C18.7681 28.2965 21.0153 28.1197 20.797 27.1575C20.5631 26.1268 20.4255 25.8432 20.7703 24.6372C23.6809 23.2672 24.0888 21.5718 24.9983 19.366C26.2387 16.3581 25.979 15.6073 25.9743 12.9477C25.9711 11.2135 25.4233 10.537 24.888 10.5453Z"
-            fill="#F58220" />
+          <path d="M13 0C8.64802 0 5.10828 3.51245 5.10828 7.83089C5.10828 12.1493 8.64802 15.6618 13 15.6618C17.352 15.6618 20.8917 12.1493 20.8917 7.83089C20.8917 3.51245 17.352 0 13 0ZM12.4943 1.87502L11.7796 3.99815L14.9451 3.66907L14.6302 2.6175L15.518 2.86141V4.02803L16.9047 4.11778L16.6335 3.07085L17.3624 2.65196C18.8526 3.88852 19.799 5.74769 19.799 7.83089C19.799 8.83493 19.579 9.78686 19.1844 10.6423L17.5981 10.9087V12.8048C17.2955 13.0803 16.9684 13.3281 16.6208 13.5451L15.94 12.4941L14.6134 12.8531L14.9862 14.2859C14.3422 14.4798 13.6729 14.5781 13 14.5775C11.1173 14.5775 9.41613 13.8224 8.18624 12.6001L9.39792 12.4344L10.212 10.8488L7.61912 9.56248L9.4582 8.00678L7.86043 6.69059L6.22788 7.2305C6.41679 5.0952 7.60304 3.24861 9.32349 2.15139L9.66927 4.89557L12.4943 1.87502ZM14.8546 5.74329L12.6588 7.13936L14.5775 8.83161L15.9632 8.42971L15.8352 10.0797L18.3721 9.44507L17.4127 7.28748L15.8779 7.30863L17.2423 6.1452L14.8546 5.74329H14.8546ZM12.5737 8.17587L11.4011 8.68349L12.2325 9.29695L12.5737 8.17587ZM9.81994 8.36586L9.006 9.32303L11.261 10.8957L9.81994 8.36586ZM13.4477 8.89504L12.6163 10.4394L14.6202 11.7931L13.9167 10.7989L14.7907 9.76234L13.4477 8.89504ZM1.11204 10.5453C0.576739 10.537 0.0288719 11.2135 0.0257152 12.9476C0.0209802 15.6073 -0.238718 16.3581 1.00168 19.366C1.91123 21.5718 2.31911 23.2672 5.22969 24.6372C5.5745 25.8432 5.43688 26.1268 5.20298 27.1575C4.98469 28.1197 7.23194 28.2966 8.87773 27.486C10.6437 26.5301 10.4955 23.8984 10.18 22.1138C9.81314 20.0383 8.65877 19.607 7.65816 18.7205C6.61918 17.2461 6.37739 14.5753 4.69233 13.4979C4.34042 13.2729 2.54518 13.0445 5.01176 19.1568C1.75971 18.3575 2.35207 14.6526 2.1169 11.9096C2.04684 11.0927 1.58433 10.5524 1.11204 10.5452V10.5453ZM24.888 10.5453C24.4157 10.5525 23.9532 11.0927 23.8831 11.9096C23.6479 14.6526 24.2403 18.3575 20.9882 19.1568C23.4549 13.0444 21.6596 13.2729 21.3077 13.4979C19.6226 14.5753 19.3809 17.2461 18.3418 18.7205C17.3413 19.607 16.1868 20.0383 15.82 22.1138C15.5045 23.8984 15.3563 26.5301 17.1223 27.486C18.7681 28.2965 21.0153 28.1197 20.797 27.1575C20.5631 26.1268 20.4255 25.8432 20.7703 24.6372C23.6809 23.2672 24.0888 21.5718 24.9983 19.366C26.2387 16.3581 25.979 15.6073 25.9743 12.9477C25.9711 11.2135 25.4233 10.537 24.888 10.5453Z" fill="#F58220"/>
         </svg>
         <div class="ml-2">
           <p class="ml-2 text-[#417453] whitespace-pre text-sm font-bold -mb-1">Môdulo</p>
-          <p class="ml-2 text-[#444444] whitespace-pre">Catalogo de itens disponiveis</p>
+          <p class="ml-2 text-[#444444] whitespace-pre">Relatorios e Estatisticas (trocas, doações e avaliações)</p>
         </div>
       </div>
 
@@ -59,7 +70,8 @@
           </div>
         </div>
 
-        <div onclick="backModule()"
+        <div
+          onclick="backModule()"
           class="flex ml-2 cursor-pointer items-center justify-center py-2 px-4 rounded-md bg-[#FFD1D1] hover:bg-[#FFADAD]">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -78,71 +90,70 @@
 
   <div class="w-full mt-16">
     <div class="flex max-w-6xl flex-col my-0 mx-auto px-8 items-start justify-start">
-
-      <div class="flex w-full items-center justify-between mt-11">
-        <span class="text-[#7A7A7A]">Itens cadastrados:</span>
-      </div>
-      <div class="mt-4 w-full flex items-center flex-wrap">
-        {% for produto in produtos %}
-        <div card-item class="w-[12rem]">
-          <img class="w-full h-[50%] object-cover rounded-md"
-            src="{{ url_for('static', filename='assets/img/' + produto.foto_anexada) }}" alt="Imagem">
-          <div class="mt-2">
-
-            <span class="text-sm">Quantidade: {{produto.quantidade}}</span>
-
-            <!-- Troca tipo -->
-            {% if produto.tipo == 1 %}
-            <div class="flex items-center">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g clip-path="url(#clip0_19_806)">
-                  <path
-                    d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z"
-                    fill="#417453" />
-                  <path
-                    d="M6.89151 17.1084C6.75401 16.9708 6.68525 16.7958 6.68525 16.5833C6.68525 16.3708 6.75401 16.1958 6.89151 16.0582L7.92276 15.027C7.52276 14.5145 7.21325 13.9458 6.99425 13.3208C6.77525 12.6958 6.66601 12.0333 6.66651 11.3333C6.66651 9.65831 7.24776 8.23957 8.41025 7.07706C9.57276 5.91457 10.9915 5.33331 12.6665 5.33331H18.6665V11.3333C18.6665 13.0083 18.0853 14.427 16.9228 15.5896C15.7602 16.7521 14.3416 17.3333 12.6665 17.3333C11.9665 17.3333 11.307 17.2238 10.688 17.0048C10.069 16.7858 9.50351 16.4765 8.99151 16.077L7.94151 17.1084C7.80401 17.2458 7.62901 17.3145 7.41651 17.3145C7.20401 17.3145 7.02901 17.2458 6.89151 17.1084ZM9.92901 14.0708C10.0665 14.2333 10.2415 14.3116 10.454 14.3056C10.6665 14.2996 10.8478 14.2213 10.9978 14.0708L13.9416 11.1271C14.0916 10.9771 14.1665 10.7991 14.1665 10.5931C14.1665 10.3871 14.0916 10.2088 13.9416 10.0583C13.804 9.92082 13.629 9.85206 13.4165 9.85206C13.204 9.85206 13.029 9.92082 12.8915 10.0583L9.92901 13.0208C9.79151 13.1583 9.72276 13.3303 9.72276 13.5368C9.72276 13.7433 9.79151 13.9213 9.92901 14.0708Z"
-                    fill="white" />
-                </g>
-                <defs>
-                  <clipPath id="clip0_19_806">
-                    <rect width="24" height="24" fill="white" />
-                  </clipPath>
-                </defs>
-              </svg>
-
-              <strong class="text-[#417453] ml-3">{{produto.valor}} Ecoins</strong>
-            </div>
-            {% elif produto.tipo == 2 %}
-            <strong class="text-[#F58220]">R$: {{produto.valor}}</strong>
-            {% elif produto.tipo == 3 %}
-            <strong class="text-[#EE43B4]">Doação</strong>
-            {% endif %}
-            <!-- Troca tipo fim -->
-
-            <p class="text-[#444444] mt-1">{{produto.nome_item}}</p>
-
-            <div onclick="adquirirProduto('{{produto.id}}')" class="mt-1 flex w-full cursor-pointer items-center justify-center py-2 px-4 rounded-md 
-              {% if produto.tipo == 1 %}
-                bg-[#417453] hover:bg-[#30573e]
-              {% elif produto.tipo == 2 %}
-                bg-[#F58220] hover:bg-[#D46C1E]
-              {% elif produto.tipo == 3 %}
-                bg-[#EE43B4] hover:bg-[#D62B9A]
-              {% endif %}">
-              {% if produto.tipo == 1 %}
-              <span class="text-white">Trocar</span>
-              {% elif produto.tipo == 2 %}
-              <span class="text-white">Comprar</span>
-              {% elif produto.tipo == 3 %}
-              <span class="text-white">Adquirir</span>
-              {% endif %}
-            </div>
+        
+      <!-- Tabela feita com tailwind com as colunas Id, tipo do item, item cadastrado, situação rendimento -->
+      <h1 class="mt-8 text-[#7A7A7A] text-[1rem] font-semiBold">
+        Relatorios e Estatisticas
+      </h1>
+      <div class="mt-4 w-full">
+        <table class="w-full">
+          <thead class="bg-[#417453]">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-center text-white font-regular">
+                Itens Cadastrados
+              </th>
+              <th scope="col" class="px-6 py-3 text-center text-white font-regular">
+                Avaliados
+              </th>
+              <th scope="col" class="px-6 py-3 text-center text-white font-regular">
+                Trocados
+              </th>
+              <th scope="col" class="px-6 py-3 text-center text-white font-regular">
+                Doados
+              </th>
+            </tr>
+          </thead>
+          <tbody tableBody class="bg-white ">
+            <tr class="border-[1px] border-[#D9D9D9]">
+              <td class="px-6 py-4 whitespace-nowrap text-center text-[#7A7A7A] font-regular">
+                {{ data.relatorios.itens_cadastrados }}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-center text-[#7A7A7A] font-regular">
+                {{ data.relatorios.itens_avaliados }}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-center text-[#7A7A7A] font-regular">
+                {{ data.relatorios.itens_trocados }}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-center text-[#7A7A7A] font-regular">
+                {{ data.relatorios.itens_doacao }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="flex items-center mt-3">
+          <div
+            onclick="exportTxt()"
+            class="flex mr-3 cursor-pointer items-center justify-center py-2 px-4 rounded-md bg-[#417453] hover:bg-[#30573e]">
+            <span class="text-white">Exportar dados .txt</span>
           </div>
-        </div>
-        {% endfor %}
-      </div>
 
+          <div
+            onclick="exportCsv()"
+            class="flex mr-3 cursor-pointer items-center justify-center py-2 px-4 rounded-md bg-[#417453] hover:bg-[#30573e]">
+            <span class="text-white">Exportar dados .csv</span>
+          </div>
+
+          <div
+            onclick="exportRelatorioEstatisticoTxt()"
+            class="flex cursor-pointer items-center justify-center py-2 px-4 rounded-md bg-[#F58220] hover:bg-[#D46C1E]">
+            <span class="text-white">Gerar Relatorio Estatistico (formato .txt)</span>
+          </div>
+
+        </div>
+      </div>
     </div>
+
+  </div>
 </section>
 <script defer>
   let tokenUser = {};
@@ -172,7 +183,13 @@
 
         if (data.status === 200) {
           userInfo = data.user;
-          // getItensCadastrados();
+          console.log("nivel de acesso", data.user.nivel_acesso);
+
+          if (data.user.nivel_acesso !== "gerente") {
+            window.location.replace('/menu');
+            alert('Erro:Você não tem acesso a essa página');
+            return
+          }
 
           setUserInfo();
         } else {
@@ -180,8 +197,8 @@
           // window.location.replace('/menu');
         }
 
+        return data;
       } catch (error) {
-        console.error(error);
         alert('Erro ao buscar usuário logado');
       }
     }
@@ -202,47 +219,66 @@
     window.location.replace('/menu');
   }
 
-  function adquirirProduto(idProduto) {
-    const userToken = JSON.parse(localStorage.getItem('userToken'));
+  // Função para exportar relatório em txt
+  function exportTxt() {
+    const relatorios = '{{ data.relatorios }}';
+    const itens_cadastrados = '{{ data.relatorios.itens_cadastrados }}'
+    const itens_avaliados = '{{ data.relatorios.itens_avaliados }}'
+    const itens_trocados = '{{ data.relatorios.itens_trocados }}'
+    const itens_doacao = '{{ data.relatorios.itens_doacao }}'
 
-    if (!userInfo?.id_usuario) {
-      alert('Aviso:Você precisa estar logado para adquirir um produto');
-      return
-    }
+    const data = `RELATÓRIO ESTATÍSTICO\n\nitens_cadastrados = ${itens_cadastrados}\nitens_avaliados = ${itens_avaliados}\nitens_trocados = ${itens_trocados}\nitens_doacao = ${itens_doacao}`;
 
-    console.warn('Adquirir produto', idProduto);
+    const dataBlob = new Blob([data], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(dataBlob);
 
-    fetch(`/api/adquirirProduto`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        token: userToken.token,
-        idProduto: idProduto,
-      })
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (data.status === 200) {
-          alert(data.message);
-          window.location.replace('/catalogo_itens');
-        } else {
-          alert(data.message);
-        }
-      })
-      .catch(error => {
-        console.error(error);
-        alert('Erro: Erro ao adquirir produto C');
-      });
-
-    try {
-      
-    } catch (error) {
-      console.error(error);
-      alert('Erro:Erro ao adquirir produto');
-    }
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'relatorio.txt';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
+
+  
+  function exportRelatorioEstatisticoTxt() {
+    console.warn('SDD');
+    const itens_cadastrados = "{{ data.estatisticos.itens_cadastrados }}";
+    const itens_vendidos = "{{ data.estatisticos.itens_vendidos }}";
+
+    const data = `RELATÓRIO ESTATÍSTICO\n\nitens_cadastrados = ${itens_cadastrados}\nitens_vendidos = ${itens_vendidos}`;
+
+    const dataBlob = new Blob([data], { type: "text/plain" });
+    const url = window.URL.createObjectURL(dataBlob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "relatorio_estatistico.txt";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  // Função para exportar no formato de csv
+  function exportCsv() {
+    const relatorios = '{{ data.relatorios }}';
+    const itens_cadastrados = '{{ data.relatorios.itens_cadastrados }}'
+    const itens_avaliados = '{{ data.relatorios.itens_avaliados }}'
+    const itens_trocados = '{{ data.relatorios.itens_trocados }}'
+    const itens_doacao = '{{ data.relatorios.itens_doacao }}'
+
+    const data = `itens_cadastrados;itens_avaliados;itens_trocados;itens_doacao\n${itens_cadastrados};${itens_avaliados};${itens_trocados};${itens_doacao}`;
+
+    const dataBlob = new Blob([data], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(dataBlob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'relatorio.csv';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
 
 </script>
 {% endblock %}

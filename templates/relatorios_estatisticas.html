@@ -32,7 +32,7 @@
 {% block content %}
 <section class="flex flex-col min-h-full min-w-full">
 
-  <header class="w-full py-2 bg-[#FFE7D3]">
+  <header class="fixed w-full py-2 bg-[#FFE7D3]">
     <div class="flex max-w-6xl my-0 mx-auto px-8 items-center justify-between">
 
       <div class="flex items-center">
@@ -41,7 +41,7 @@
         </svg>
         <div class="ml-2">
           <p class="ml-2 text-[#417453] whitespace-pre text-sm font-bold -mb-1">Môdulo</p>
-          <p class="ml-2 text-[#444444] whitespace-pre">Cadastro de Itens para Troca ou Doação</p>
+          <p class="ml-2 text-[#444444] whitespace-pre">Relatorios e Estatisticas (trocas, doações e avaliações)</p>
         </div>
       </div>
 
@@ -88,59 +88,68 @@
     </div>
   </header>
 
-  <div class="w-full">
+  <div class="w-full mt-16">
     <div class="flex max-w-6xl flex-col my-0 mx-auto px-8 items-start justify-start">
-
-      <div class="flex w-full items-center justify-between mt-11">
-        <span class="text-[#7A7A7A]">Itens cadastrados:</span>
-
-        <div class="flex items-center">
-
-          <div class="flex items-center">
-            <div class="w-6 h-6 bg-[#EE43B4] rounded-full">
-            </div>
-            <span class="ml-3">Para Doação</span>
-          </div>
-
-          <div class="flex items-center ml-4">
-            <div class="w-6 h-6 bg-[#417453] rounded-full">
-            </div>
-            <span class="ml-3">Para Troca</span>
-          </div>
-
-          <div
-            onclick="window.location.replace('/cadastrar_item')"
-            class="flex ml-4 cursor-pointer items-center justify-center py-2 px-4 rounded-md bg-[#417453] hover:bg-[#30573e]">
-            <span class="text-white">Cadastrar</span>
-          </div>
-        </div>
-
-
-
-      </div>
+        
       <!-- Tabela feita com tailwind com as colunas Id, tipo do item, item cadastrado, situação rendimento -->
-      <div class="mt-8 w-full">
+      <h1 class="mt-8 text-[#7A7A7A] text-[1rem] font-semiBold">
+        Relatorios e Estatisticas
+      </h1>
+      <div class="mt-4 w-full">
         <table class="w-full">
           <thead class="bg-[#417453]">
             <tr>
               <th scope="col" class="px-6 py-3 text-center text-white font-regular">
-                Id</th>
-              <th scope="col" class="px-6 py-3 w-[7rem] text-center text-white font-regular">
-                Tipo</th>
-              <th scope="col" class="px-6 py-3 text-center text-white font-regular">
-                Categoria</th>
-              <th scope="col" class="px-6 py-3 text-left text-white font-regular">
-                Nome
+                Itens Cadastrados
               </th>
-              <th scope="col" class="px-6 py-3 text-left text-white font-regular">
-                Status</th>
               <th scope="col" class="px-6 py-3 text-center text-white font-regular">
-                Rendimento</th>
+                Avaliados
+              </th>
+              <th scope="col" class="px-6 py-3 text-center text-white font-regular">
+                Trocados
+              </th>
+              <th scope="col" class="px-6 py-3 text-center text-white font-regular">
+                Doados
+              </th>
             </tr>
           </thead>
           <tbody tableBody class="bg-white ">
+            <tr class="border-[1px] border-[#D9D9D9]">
+              <td class="px-6 py-4 whitespace-nowrap text-center text-[#7A7A7A] font-regular">
+                {{ data.relatorios.itens_cadastrados }}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-center text-[#7A7A7A] font-regular">
+                {{ data.relatorios.itens_avaliados }}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-center text-[#7A7A7A] font-regular">
+                {{ data.relatorios.itens_trocados }}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-center text-[#7A7A7A] font-regular">
+                {{ data.relatorios.itens_doacao }}
+              </td>
+            </tr>
           </tbody>
         </table>
+        <div class="flex items-center mt-3">
+          <div
+            onclick="exportTxt()"
+            class="flex mr-3 cursor-pointer items-center justify-center py-2 px-4 rounded-md bg-[#417453] hover:bg-[#30573e]">
+            <span class="text-white">Exportar dados .txt</span>
+          </div>
+
+          <div
+            onclick="exportCsv()"
+            class="flex mr-3 cursor-pointer items-center justify-center py-2 px-4 rounded-md bg-[#417453] hover:bg-[#30573e]">
+            <span class="text-white">Exportar dados .csv</span>
+          </div>
+
+          <div
+            onclick="exportRelatorioEstatisticoTxt()"
+            class="flex cursor-pointer items-center justify-center py-2 px-4 rounded-md bg-[#F58220] hover:bg-[#D46C1E]">
+            <span class="text-white">Gerar Relatorio Estatistico (formato .txt)</span>
+          </div>
+
+        </div>
       </div>
     </div>
 
@@ -174,11 +183,9 @@
 
         if (data.status === 200) {
           userInfo = data.user;
-          getItensCadastrados();
-          
           console.log("nivel de acesso", data.user.nivel_acesso);
 
-          if (data.user.nivel_acesso !== "cliente") {
+          if (data.user.nivel_acesso !== "gerente") {
             window.location.replace('/menu');
             alert('Erro:Você não tem acesso a essa página');
             return
@@ -212,83 +219,66 @@
     window.location.replace('/menu');
   }
 
-  // Função para pegar itens cadastrados
-  async function getItensCadastrados() {
-    try {
-      const response = await fetch(`/api/itensCadastrados?id_usuario=${userInfo.id_usuario}`);
-      const data = await response.json();
+  // Função para exportar relatório em txt
+  function exportTxt() {
+    const relatorios = '{{ data.relatorios }}';
+    const itens_cadastrados = '{{ data.relatorios.itens_cadastrados }}'
+    const itens_avaliados = '{{ data.relatorios.itens_avaliados }}'
+    const itens_trocados = '{{ data.relatorios.itens_trocados }}'
+    const itens_doacao = '{{ data.relatorios.itens_doacao }}'
 
-      console.warn("Data =>", data);
-      if (data.itens) {
-          const tableBody = document.querySelector('[tableBody]');
+    const data = `RELATÓRIO ESTATÍSTICO\n\nitens_cadastrados = ${itens_cadastrados}\nitens_avaliados = ${itens_avaliados}\nitens_trocados = ${itens_trocados}\nitens_doacao = ${itens_doacao}`;
 
-          data.itens.forEach(item => {
+    const dataBlob = new Blob([data], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(dataBlob);
 
-            const row = document.createElement('tr');
-            row.classList.add('border', 'border-[#D9D9D9]');
-
-            const idCell = document.createElement('td');
-            idCell.classList.add('px-6', 'py-4');
-            idCell.innerHTML = `<div class="text-[#7A7A7A]">#${item.id}</div>`;
-            row.appendChild(idCell);
-
-            const tipoCell = document.createElement('td');
-            tipoCell.classList.add('px-6', 'py-4', 'w-full', 'flex', 'items-center', 'justify-center');
-
-              // # Tipos de itens
-              // # 1 - Troca
-              // # 2 - Venda
-              // # 3 - Doação
-            if (item.tipo === 1) {
-              tipoCell.innerHTML = `<div class="w-6 h-6 bg-[#417453] rounded-full"></div>`;
-            } else if (item.tipo === 2) {
-              tipoCell.innerHTML = `<div class="w-6 h-6 bg-[#F58220] rounded-full"></div>`;
-            } else {
-              tipoCell.innerHTML = `<div class="w-6 h-6 bg-[#EE43B4] rounded-full"></div>`;
-            }
-            row.appendChild(tipoCell);
-
-            const categoriaCell = document.createElement('td');
-            categoriaCell.classList.add('px-6', 'py-4');
-            categoriaCell.innerHTML = `<div class="text-[#7A7A7A]">${item.categoria}</div>`;
-            row.appendChild(categoriaCell);
-            
-            const nomeCell = document.createElement('td');
-            nomeCell.classList.add('px-6', 'py-4');
-            nomeCell.innerHTML = `<div class="text-[#7A7A7A]">${item.nome_item}</div>`;
-            row.appendChild(nomeCell);
-
-            const condicaoCell = document.createElement('td');
-            condicaoCell.classList.add('px-6', 'py-4');
-
-            // # Status do item
-            // # 1 - Aguardando avaliação
-            // # 2 - Aprovado
-            // # 3 - Reprovado
-
-            if (item.status === 1) {
-              condicaoCell.innerHTML = `<div class="text-[#7A7A7A]">Em Avaliação</div>`;
-            } else if (item.status === 2) {
-              condicaoCell.innerHTML = `<div class="text-[#F58220]">Aprovado</div>`;
-            } else {
-              condicaoCell.innerHTML = `<div class="text-[#FF3838]">Reprovado</div>`;
-            }
-            row.appendChild(condicaoCell);
-
-            const quantidadeCell = document.createElement('td');
-            quantidadeCell.classList.add('px-6', 'py-4', 'w-full', 'flex', 'items-center', 'justify-center');
-            quantidadeCell.innerHTML = `<div class="text-[#7A7A7A]">${item.rendimento}</div>`;
-            row.appendChild(quantidadeCell);
-
-            tableBody.appendChild(row);
-          });
-        }
-
-    } catch (error) {
-      console.error(error);
-      alert('Erro ao buscar itens cadastrados');
-    }
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'relatorio.txt';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
+
+  
+  function exportRelatorioEstatisticoTxt() {
+    console.warn('SDD');
+    const itens_cadastrados = "{{ data.estatisticos.itens_cadastrados }}";
+    const itens_vendidos = "{{ data.estatisticos.itens_vendidos }}";
+
+    const data = `RELATÓRIO ESTATÍSTICO\n\nitens_cadastrados = ${itens_cadastrados}\nitens_vendidos = ${itens_vendidos}`;
+
+    const dataBlob = new Blob([data], { type: "text/plain" });
+    const url = window.URL.createObjectURL(dataBlob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "relatorio_estatistico.txt";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  // Função para exportar no formato de csv
+  function exportCsv() {
+    const relatorios = '{{ data.relatorios }}';
+    const itens_cadastrados = '{{ data.relatorios.itens_cadastrados }}'
+    const itens_avaliados = '{{ data.relatorios.itens_avaliados }}'
+    const itens_trocados = '{{ data.relatorios.itens_trocados }}'
+    const itens_doacao = '{{ data.relatorios.itens_doacao }}'
+
+    const data = `itens_cadastrados;itens_avaliados;itens_trocados;itens_doacao\n${itens_cadastrados};${itens_avaliados};${itens_trocados};${itens_doacao}`;
+
+    const dataBlob = new Blob([data], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(dataBlob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'relatorio.csv';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
 
 </script>
 {% endblock %}

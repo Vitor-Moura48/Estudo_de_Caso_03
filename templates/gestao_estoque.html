@@ -32,7 +32,7 @@
 {% block content %}
 <section class="flex flex-col min-h-full min-w-full">
 
-  <header class="w-full py-2 bg-[#FFE7D3]">
+  <header class="fixed w-full py-2 bg-[#FFE7D3]">
     <div class="flex max-w-6xl my-0 mx-auto px-8 items-center justify-between">
 
       <div class="flex items-center">
@@ -41,7 +41,7 @@
         </svg>
         <div class="ml-2">
           <p class="ml-2 text-[#417453] whitespace-pre text-sm font-bold -mb-1">Môdulo</p>
-          <p class="ml-2 text-[#444444] whitespace-pre">Cadastro de Itens para Troca ou Doação</p>
+          <p class="ml-2 text-[#444444] whitespace-pre">Gestão de Estoque de Produtos à Venda</p>
         </div>
       </div>
 
@@ -88,11 +88,11 @@
     </div>
   </header>
 
-  <div class="w-full">
+  <div class="w-full mt-16">
     <div class="flex max-w-6xl flex-col my-0 mx-auto px-8 items-start justify-start">
 
       <div class="flex w-full items-center justify-between mt-11">
-        <span class="text-[#7A7A7A]">Itens cadastrados:</span>
+        <span class="text-[#7A7A7A]">Produtos cadastrados:</span>
 
         <div class="flex items-center">
 
@@ -109,9 +109,9 @@
           </div>
 
           <div
-            onclick="window.location.replace('/cadastrar_item')"
+            onclick="window.location.replace('/cadastrar_produto')"
             class="flex ml-4 cursor-pointer items-center justify-center py-2 px-4 rounded-md bg-[#417453] hover:bg-[#30573e]">
-            <span class="text-white">Cadastrar</span>
+            <span class="text-white">Cadastrar Produto</span>
           </div>
         </div>
 
@@ -120,22 +120,20 @@
       </div>
       <!-- Tabela feita com tailwind com as colunas Id, tipo do item, item cadastrado, situação rendimento -->
       <div class="mt-8 w-full">
-        <table class="w-full">
+        <table class="w-full mb-7">
           <thead class="bg-[#417453]">
             <tr>
-              <th scope="col" class="px-6 py-3 text-center text-white font-regular">
+              <th scope="col" class="px-6 py-3 w-[10%] text-center text-white font-regular">
                 Id</th>
               <th scope="col" class="px-6 py-3 w-[7rem] text-center text-white font-regular">
                 Tipo</th>
-              <th scope="col" class="px-6 py-3 text-center text-white font-regular">
-                Categoria</th>
               <th scope="col" class="px-6 py-3 text-left text-white font-regular">
+                Categoria</th>
+              <th scope="col" class="px-6 py-3 w-[40%] text-left text-white font-regular">
                 Nome
               </th>
-              <th scope="col" class="px-6 py-3 text-left text-white font-regular">
-                Status</th>
               <th scope="col" class="px-6 py-3 text-center text-white font-regular">
-                Rendimento</th>
+                Quantidade</th>
             </tr>
           </thead>
           <tbody tableBody class="bg-white ">
@@ -178,7 +176,7 @@
           
           console.log("nivel de acesso", data.user.nivel_acesso);
 
-          if (data.user.nivel_acesso !== "cliente") {
+          if (data.user.nivel_acesso !== "funcionario") {
             window.location.replace('/menu');
             alert('Erro:Você não tem acesso a essa página');
             return
@@ -215,10 +213,11 @@
   // Função para pegar itens cadastrados
   async function getItensCadastrados() {
     try {
-      const response = await fetch(`/api/itensCadastrados?id_usuario=${userInfo.id_usuario}`);
+      const response = await fetch(`/api/pegarTodosProdutos`);
       const data = await response.json();
 
-      console.warn("Data =>", data);
+      console.warn("Data =>", JSON.stringify(data));
+
       if (data.itens) {
           const tableBody = document.querySelector('[tableBody]');
 
@@ -258,26 +257,9 @@
             nomeCell.innerHTML = `<div class="text-[#7A7A7A]">${item.nome_item}</div>`;
             row.appendChild(nomeCell);
 
-            const condicaoCell = document.createElement('td');
-            condicaoCell.classList.add('px-6', 'py-4');
-
-            // # Status do item
-            // # 1 - Aguardando avaliação
-            // # 2 - Aprovado
-            // # 3 - Reprovado
-
-            if (item.status === 1) {
-              condicaoCell.innerHTML = `<div class="text-[#7A7A7A]">Em Avaliação</div>`;
-            } else if (item.status === 2) {
-              condicaoCell.innerHTML = `<div class="text-[#F58220]">Aprovado</div>`;
-            } else {
-              condicaoCell.innerHTML = `<div class="text-[#FF3838]">Reprovado</div>`;
-            }
-            row.appendChild(condicaoCell);
-
             const quantidadeCell = document.createElement('td');
             quantidadeCell.classList.add('px-6', 'py-4', 'w-full', 'flex', 'items-center', 'justify-center');
-            quantidadeCell.innerHTML = `<div class="text-[#7A7A7A]">${item.rendimento}</div>`;
+            quantidadeCell.innerHTML = `<div class="text-[#7A7A7A]">${item.quantidade}</div>`;
             row.appendChild(quantidadeCell);
 
             tableBody.appendChild(row);

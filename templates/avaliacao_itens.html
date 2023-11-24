@@ -41,7 +41,7 @@
         </svg>
         <div class="ml-2">
           <p class="ml-2 text-[#417453] whitespace-pre text-sm font-bold -mb-1">Môdulo</p>
-          <p class="ml-2 text-[#444444] whitespace-pre">Cadastro de Itens para Troca ou Doação</p>
+          <p class="ml-2 text-[#444444] whitespace-pre">Avaliação de Itens + Gestão de Créditos</p>
         </div>
       </div>
 
@@ -92,7 +92,7 @@
     <div class="flex max-w-6xl flex-col my-0 mx-auto px-8 items-start justify-start">
 
       <div class="flex w-full items-center justify-between mt-11">
-        <span class="text-[#7A7A7A]">Itens cadastrados:</span>
+        <span class="text-[#7A7A7A]">Itens a serem avaliados: </span>
 
         <div class="flex items-center">
 
@@ -107,12 +107,6 @@
             </div>
             <span class="ml-3">Para Troca</span>
           </div>
-
-          <div
-            onclick="window.location.replace('/cadastrar_item')"
-            class="flex ml-4 cursor-pointer items-center justify-center py-2 px-4 rounded-md bg-[#417453] hover:bg-[#30573e]">
-            <span class="text-white">Cadastrar</span>
-          </div>
         </div>
 
 
@@ -125,17 +119,15 @@
             <tr>
               <th scope="col" class="px-6 py-3 text-center text-white font-regular">
                 Id</th>
-              <th scope="col" class="px-6 py-3 w-[7rem] text-center text-white font-regular">
+              <th scope="col" class="px-6 py-3 text-center text-white font-regular">
                 Tipo</th>
               <th scope="col" class="px-6 py-3 text-center text-white font-regular">
                 Categoria</th>
-              <th scope="col" class="px-6 py-3 text-left text-white font-regular">
+              <th scope="col" class="px-6 py-3 text-left text-white font-regular w-[50%]">
                 Nome
               </th>
-              <th scope="col" class="px-6 py-3 text-left text-white font-regular">
-                Status</th>
               <th scope="col" class="px-6 py-3 text-center text-white font-regular">
-                Rendimento</th>
+                Ação</th>
             </tr>
           </thead>
           <tbody tableBody class="bg-white ">
@@ -174,11 +166,11 @@
 
         if (data.status === 200) {
           userInfo = data.user;
-          getItensCadastrados();
+          getItensAvaliacao();
           
           console.log("nivel de acesso", data.user.nivel_acesso);
 
-          if (data.user.nivel_acesso !== "cliente") {
+          if (data.user.nivel_acesso !== "funcionario") {
             window.location.replace('/menu');
             alert('Erro:Você não tem acesso a essa página');
             return
@@ -213,9 +205,9 @@
   }
 
   // Função para pegar itens cadastrados
-  async function getItensCadastrados() {
+  async function getItensAvaliacao() {
     try {
-      const response = await fetch(`/api/itensCadastrados?id_usuario=${userInfo.id_usuario}`);
+      const response = await fetch(`/api/avaliacaoItens`);
       const data = await response.json();
 
       console.warn("Data =>", data);
@@ -246,38 +238,27 @@
             } else {
               tipoCell.innerHTML = `<div class="w-6 h-6 bg-[#EE43B4] rounded-full"></div>`;
             }
+
             row.appendChild(tipoCell);
 
             const categoriaCell = document.createElement('td');
             categoriaCell.classList.add('px-6', 'py-4');
             categoriaCell.innerHTML = `<div class="text-[#7A7A7A]">${item.categoria}</div>`;
             row.appendChild(categoriaCell);
-            
+
             const nomeCell = document.createElement('td');
             nomeCell.classList.add('px-6', 'py-4');
             nomeCell.innerHTML = `<div class="text-[#7A7A7A]">${item.nome_item}</div>`;
             row.appendChild(nomeCell);
 
-            const condicaoCell = document.createElement('td');
-            condicaoCell.classList.add('px-6', 'py-4');
-
-            // # Status do item
-            // # 1 - Aguardando avaliação
-            // # 2 - Aprovado
-            // # 3 - Reprovado
-
-            if (item.status === 1) {
-              condicaoCell.innerHTML = `<div class="text-[#7A7A7A]">Em Avaliação</div>`;
-            } else if (item.status === 2) {
-              condicaoCell.innerHTML = `<div class="text-[#F58220]">Aprovado</div>`;
-            } else {
-              condicaoCell.innerHTML = `<div class="text-[#FF3838]">Reprovado</div>`;
-            }
-            row.appendChild(condicaoCell);
-
             const quantidadeCell = document.createElement('td');
             quantidadeCell.classList.add('px-6', 'py-4', 'w-full', 'flex', 'items-center', 'justify-center');
-            quantidadeCell.innerHTML = `<div class="text-[#7A7A7A]">${item.rendimento}</div>`;
+            quantidadeCell.innerHTML = `
+            <div
+            onclick="window.location.replace('/avaliar_item/${item.id}')"
+            class="flex cursor-pointer items-center justify-center py-1 px-4 rounded-md text-[0.9rem] bg-[#F58220] hover:bg-[#D8711A]">
+            <span class="text-white">Avaliar</span>
+          </div>`;
             row.appendChild(quantidadeCell);
 
             tableBody.appendChild(row);

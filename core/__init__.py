@@ -4,6 +4,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets, QtWebChannel
 from PyQt6.QtWebEngineWidgets import QWebEngineView
 from PyQt6.QtWebEngineCore import *
 from PyQt6.QtCore import QUrl
+from PyQt6.QtCore import QLocale
 import socket
 import json
 
@@ -98,6 +99,11 @@ def init_gui(application, port=0, width=800, height=600,
 
     # Application Level
     qtapp = QtWidgets.QApplication(argv)
+
+    # Definir o idioma para português brasileiro
+    locale = QLocale(QLocale.Language.Portuguese, QLocale.Country.Brazil)
+    QLocale.setDefault(locale)
+
     webapp = ApplicationThread(application, port)
     webapp.start()
     qtapp.aboutToQuit.connect(webapp.terminate)
@@ -130,6 +136,8 @@ def init_gui(application, port=0, width=800, height=600,
 
     # WebPage Level
     page = WebPage(f"http://localhost:{port}/{router}")
+
+    page.profile().setHttpAcceptLanguage('pt-BR')
 
     # Se a corta for /menu deve da um localstorage.setItem('token', token)
     autenticacao = Autenticacao()

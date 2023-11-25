@@ -1,0 +1,58 @@
+# Primeiro vou importar a bibliotec apandas
+import pandas as pd
+
+
+#Segundo vou usar o dataset (endereço da máquina)
+dados = pd.read_csv( ... )
+dados.head()#Exibir
+
+
+# Biblioteca de da# Sobre a biblioteca data:
+# https://www.youtube.com/watch?v=A7S_RwWcrK0&ab_channel=HashtagPrograma%C3%A7%C3%A3o
+# from datetime import datetime
+from datetime import timedelta
+# DAta de hoje    - - - > isso deve ficar na nom momento que o produtoi for comprado
+hoje = datetime.now()
+# E depois deve ser colocado no banco de dados referente ao produto 
+
+
+# Exibir Data
+print(hoje.day, '/' , hoje.month , '/' , hoje.year)
+
+
+
+
+
+#                       Organizar tabelas
+
+
+def organizar_tabela_tipo (self):
+
+    #quantidade_de_produtos = len(dados)
+
+    dadosDF = pd.DataFrame(dados)
+
+
+    # Vamos precisar criar listas para armazenar cada tipo de filtro
+    lista_maior_valor         = []
+    lista_menor_valor         = []
+    lista_tipo_material       = []
+    lista_condicao_do_produto = []
+
+
+#lá no banco de dados deve ter um item chamado "Data de venda"
+# Para eu poder consultar
+    semana = hoje + timedelta(weeks=7)
+    #Linha a cima é referente a uma semana
+    mes = hoje + timedelta(weeks=30)
+    #Linha de cima é para um mês
+
+
+    dadosDF.loc [dadosDF ["Data de Venda"]<= semana ]
+    #Aqui vai exibir apenas as linha que são dentro da condição a cima
+    
+    dadosDF.loc [dadosDF ["Data de Venda"]<= mes ]
+    #Aqui vai exibir apenas as linha que são dentro da condição a cima
+
+
+

@@ -116,8 +116,14 @@ class ProdutoItem:
                 # O id segue segue o padrão: 5 numeros aleatorios
                 venda_id = 'V' + ''.join(random.choice(string.digits) for _ in range(5))
 
+                # Pega a categoria do produto
+                categoria = produtos_df.loc[produtos_df['id'] == id_produto]['categoria'].values[0]
+
+                # Pega o tipo do produto
+                tipo = produtos_df.loc[produtos_df['id'] == id_produto]['tipo'].values[0]
+
                 # Criar o novo registro
-                novo_registro = pd.DataFrame([[venda_id, id_produto, id_comprador, 'categoria', 'tipo', id_vendedor, valor, datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")]], columns=["id", "id_item", "id_comprador", "categoria", "tipo", "id_vendedor", "valor", "data_venda"])
+                novo_registro = pd.DataFrame([[venda_id, id_produto, id_comprador, categoria, tipo, id_vendedor, valor, datetime.datetime.now().timestamp()]], columns=["id", "id_item", "id_comprador", "categoria", "tipo", "id_vendedor", "valor", "data_venda"])
 
                 # Adicionar o novo registro ao final do arquivo
                 balanco_vendas_df = pd.concat([balanco_vendas_df, novo_registro], ignore_index=True)

@@ -4,8 +4,10 @@ from werkzeug.utils import secure_filename
 import secrets
 import os
 from controller.avaliacao_controller import AvaliacaoItemsController
+from controller.balanco_controller import BalancoController
 from controller.produtos_controller import ProdutosController
 from core.util import resource_path
+from model.balanco_vendas import BalancoVendas
 from model.cadastro_itens import CadastroItens
 from model.relatorios import Relatorios
 
@@ -199,7 +201,30 @@ def relatorios_estatisticas():
     }
 
     return render_template('relatorios_estatisticas.html', data=data)
+# -- fim
 
+# -- inicio rbalanco vendas
+@app.route('/balanco_vendas')
+def balanco_vendas():
+    categorias_itens = CadastroItens.pegar_categorias_itens()
+    balanco_vendas = BalancoVendas()
+    balanco = balanco_vendas.pegar_todos_itens_vendidos()
+
+    data = {
+        'categorias_itens': categorias_itens,
+        'balanco': balanco
+    }
+
+    print(f"==>{balanco}")
+
+    return render_template('balanco_vendas.html', data=data)
+
+@app.route('/api/pegarBalancoVendas')
+def api_pegar_balanco_vendas():
+    try:
+        return BalancoController.pegar_todos_itens_vendidos()
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)})
 
 @app.route('/home')
 def home():

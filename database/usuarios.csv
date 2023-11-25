@@ -1,2 +1,4 @@
-id;usuario;nome_completo;senha;creditos;nivel_acesso
-1;otton;otton;1234;0;cliente
+id;usuario;nome_completo;senha;creditos;nivel_acesso;token
+1e;otton;otton;1234;2391;cliente;
+1aae20e73699;fael;fael 123;1234;0;funcionario;
+1dvdvd9d7g56;vitor;Vetor;1234;0;gerente;

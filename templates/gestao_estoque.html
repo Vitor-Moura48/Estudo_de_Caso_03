@@ -1,0 +1,276 @@
+{% extends "base.html" %}
+
+{% block head %}
+<style>
+  [card-options] {
+    display: none;
+    cursor: pointer;
+    min-width: 8.85rem;
+    min-height: 7.6rem;
+    /* background-color: #ffffff; */
+    box-shadow: 0px 1px 3px 2px rgba(0, 0, 0, 0.10);
+
+    &+[card-options] {
+      margin-left: 1.2rem;
+    }
+
+    &+div[todos_acessos] {
+      margin-left: 1.2rem;
+    }
+  }
+
+  [todos_acessos],
+  [visitant],
+  [cliente],
+  [funcionario],
+  [gerente] {
+    display: none;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="flex flex-col min-h-full min-w-full">
+
+  <header class="fixed w-full py-2 bg-[#FFE7D3]">
+    <div class="flex max-w-6xl my-0 mx-auto px-8 items-center justify-between">
+
+      <div class="flex items-center">
+        <svg width="26" height="28" viewBox="0 0 26 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M13 0C8.64802 0 5.10828 3.51245 5.10828 7.83089C5.10828 12.1493 8.64802 15.6618 13 15.6618C17.352 15.6618 20.8917 12.1493 20.8917 7.83089C20.8917 3.51245 17.352 0 13 0ZM12.4943 1.87502L11.7796 3.99815L14.9451 3.66907L14.6302 2.6175L15.518 2.86141V4.02803L16.9047 4.11778L16.6335 3.07085L17.3624 2.65196C18.8526 3.88852 19.799 5.74769 19.799 7.83089C19.799 8.83493 19.579 9.78686 19.1844 10.6423L17.5981 10.9087V12.8048C17.2955 13.0803 16.9684 13.3281 16.6208 13.5451L15.94 12.4941L14.6134 12.8531L14.9862 14.2859C14.3422 14.4798 13.6729 14.5781 13 14.5775C11.1173 14.5775 9.41613 13.8224 8.18624 12.6001L9.39792 12.4344L10.212 10.8488L7.61912 9.56248L9.4582 8.00678L7.86043 6.69059L6.22788 7.2305C6.41679 5.0952 7.60304 3.24861 9.32349 2.15139L9.66927 4.89557L12.4943 1.87502ZM14.8546 5.74329L12.6588 7.13936L14.5775 8.83161L15.9632 8.42971L15.8352 10.0797L18.3721 9.44507L17.4127 7.28748L15.8779 7.30863L17.2423 6.1452L14.8546 5.74329H14.8546ZM12.5737 8.17587L11.4011 8.68349L12.2325 9.29695L12.5737 8.17587ZM9.81994 8.36586L9.006 9.32303L11.261 10.8957L9.81994 8.36586ZM13.4477 8.89504L12.6163 10.4394L14.6202 11.7931L13.9167 10.7989L14.7907 9.76234L13.4477 8.89504ZM1.11204 10.5453C0.576739 10.537 0.0288719 11.2135 0.0257152 12.9476C0.0209802 15.6073 -0.238718 16.3581 1.00168 19.366C1.91123 21.5718 2.31911 23.2672 5.22969 24.6372C5.5745 25.8432 5.43688 26.1268 5.20298 27.1575C4.98469 28.1197 7.23194 28.2966 8.87773 27.486C10.6437 26.5301 10.4955 23.8984 10.18 22.1138C9.81314 20.0383 8.65877 19.607 7.65816 18.7205C6.61918 17.2461 6.37739 14.5753 4.69233 13.4979C4.34042 13.2729 2.54518 13.0445 5.01176 19.1568C1.75971 18.3575 2.35207 14.6526 2.1169 11.9096C2.04684 11.0927 1.58433 10.5524 1.11204 10.5452V10.5453ZM24.888 10.5453C24.4157 10.5525 23.9532 11.0927 23.8831 11.9096C23.6479 14.6526 24.2403 18.3575 20.9882 19.1568C23.4549 13.0444 21.6596 13.2729 21.3077 13.4979C19.6226 14.5753 19.3809 17.2461 18.3418 18.7205C17.3413 19.607 16.1868 20.0383 15.82 22.1138C15.5045 23.8984 15.3563 26.5301 17.1223 27.486C18.7681 28.2965 21.0153 28.1197 20.797 27.1575C20.5631 26.1268 20.4255 25.8432 20.7703 24.6372C23.6809 23.2672 24.0888 21.5718 24.9983 19.366C26.2387 16.3581 25.979 15.6073 25.9743 12.9477C25.9711 11.2135 25.4233 10.537 24.888 10.5453Z" fill="#F58220"/>
+        </svg>
+        <div class="ml-2">
+          <p class="ml-2 text-[#417453] whitespace-pre text-sm font-bold -mb-1">Môdulo</p>
+          <p class="ml-2 text-[#444444] whitespace-pre">Gestão de Estoque de Produtos à Venda</p>
+        </div>
+      </div>
+
+      <div class="flex items-center">
+
+        <div class="flex items-center">
+          <div>
+            <p nome_usuario class="mr-2 text-[#444444]">Desconhecido</p>
+            <div class="mr-2 flex items-center">
+              <svg width="24" height="24" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="9" cy="9" r="9" fill="#417453" />
+                <path
+                  d="M5.16875 12.8313C5.06563 12.7281 5.01406 12.5969 5.01406 12.4375C5.01406 12.2781 5.06563 12.1469 5.16875 12.0437L5.94219 11.2703C5.64219 10.8859 5.41006 10.4594 5.24581 9.99062C5.08156 9.52187 4.99963 9.025 5 8.5C5 7.24375 5.43594 6.17969 6.30781 5.30781C7.17969 4.43594 8.24375 4 9.5 4H14V8.5C14 9.75625 13.5641 10.8203 12.6922 11.6922C11.8203 12.5641 10.7563 13 9.5 13C8.975 13 8.48038 12.9179 8.01613 12.7536C7.55188 12.5894 7.12775 12.3574 6.74375 12.0578L5.95625 12.8313C5.85313 12.9344 5.72188 12.9859 5.5625 12.9859C5.40313 12.9859 5.27188 12.9344 5.16875 12.8313ZM7.44688 10.5531C7.55 10.675 7.68125 10.7337 7.84063 10.7292C8 10.7247 8.13594 10.666 8.24844 10.5531L10.4563 8.34531C10.5688 8.23281 10.625 8.09931 10.625 7.94481C10.625 7.79031 10.5688 7.65663 10.4563 7.54375C10.3531 7.44063 10.2219 7.38906 10.0625 7.38906C9.90313 7.38906 9.77188 7.44063 9.66875 7.54375L7.44688 9.76562C7.34375 9.86875 7.29219 9.99775 7.29219 10.1526C7.29219 10.3075 7.34375 10.441 7.44688 10.5531Z"
+                  fill="white" />
+              </svg>
+              <p creditos_usuario class="ml-2 text-[#417453]">?? Ecoins</p>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-center w-12 h-12 rounded-full bg-[#FFCA9D]">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M12 0.5C18.3514 0.5 23.5 5.64855 23.5 12C23.504 14.6541 22.5862 17.2272 20.9033 19.2795L20.9263 19.3048L20.7745 19.4336C19.6961 20.7092 18.3521 21.734 16.8366 22.4363C15.321 23.1387 13.6704 23.5017 12 23.5C8.6075 23.5 5.56001 22.0314 3.45551 19.6969L3.22551 19.4324L3.07371 19.3059L3.09671 19.2783C1.41398 17.2264 0.496127 14.6537 0.500012 12C0.500012 5.64855 5.64856 0.5 12 0.5ZM12 17.75C9.861 17.75 7.92785 18.4308 6.48805 19.3657C8.07769 20.559 10.0123 21.2028 12 21.2C13.9877 21.2028 15.9223 20.559 17.5119 19.3657C15.8666 18.3119 13.9539 17.7512 12 17.75ZM12 2.8C10.2687 2.79995 8.57253 3.28842 7.10643 4.20927C5.64034 5.13011 4.46383 6.44596 3.71214 8.00555C2.96045 9.56515 2.66408 11.3052 2.85711 13.0257C3.05013 14.7462 3.72471 16.3773 4.80331 17.7316C6.66746 16.3941 9.21125 15.45 12 15.45C14.7887 15.45 17.3325 16.3941 19.1967 17.7316C20.2753 16.3773 20.9499 14.7462 21.1429 13.0257C21.3359 11.3052 21.0395 9.56515 20.2879 8.00555C19.5362 6.44596 18.3597 5.13011 16.8936 4.20927C15.4275 3.28842 13.7313 2.79995 12 2.8ZM12 5.1C13.22 5.1 14.39 5.58464 15.2527 6.44731C16.1154 7.30997 16.6 8.48 16.6 9.7C16.6 10.92 16.1154 12.09 15.2527 12.9527C14.39 13.8154 13.22 14.3 12 14.3C10.78 14.3 9.60998 13.8154 8.74731 12.9527C7.88464 12.09 7.4 10.92 7.4 9.7C7.4 8.48 7.88464 7.30997 8.74731 6.44731C9.60998 5.58464 10.78 5.1 12 5.1ZM12 7.4C11.39 7.4 10.805 7.64232 10.3737 8.07365C9.94232 8.50499 9.7 9.09 9.7 9.7C9.7 10.31 9.94232 10.895 10.3737 11.3263C10.805 11.7577 11.39 12 12 12C12.61 12 13.195 11.7577 13.6263 11.3263C14.0577 10.895 14.3 10.31 14.3 9.7C14.3 9.09 14.0577 8.50499 13.6263 8.07365C13.195 7.64232 12.61 7.4 12 7.4Z"
+                fill="#417453" />
+            </svg>
+          </div>
+        </div>
+
+        <div
+          onclick="backModule()"
+          class="flex ml-2 cursor-pointer items-center justify-center py-2 px-4 rounded-md bg-[#FFD1D1] hover:bg-[#FFADAD]">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M14.945 1.25C13.578 1.25 12.475 1.25 11.608 1.367C10.708 1.487 9.94996 1.747 9.34796 2.348C8.82396 2.873 8.55796 3.518 8.41896 4.276C8.28396 5.013 8.25796 5.914 8.25196 6.996C8.2509 7.19491 8.3289 7.3861 8.46881 7.5275C8.60871 7.6689 8.79905 7.74894 8.99796 7.75C9.19688 7.75106 9.38806 7.67306 9.52947 7.53316C9.67087 7.39326 9.7509 7.20291 9.75196 7.004C9.75796 5.911 9.78596 5.136 9.89396 4.547C9.99896 3.981 10.166 3.652 10.409 3.409C10.686 3.132 11.075 2.952 11.809 2.853C12.564 2.752 13.565 2.75 15 2.75H16C17.436 2.75 18.437 2.752 19.192 2.853C19.926 2.952 20.314 3.133 20.592 3.409C20.868 3.686 21.048 4.074 21.147 4.809C21.249 5.563 21.25 6.565 21.25 8V16C21.25 17.435 21.249 18.436 21.147 19.192C21.048 19.926 20.868 20.314 20.591 20.591C20.314 20.868 19.926 21.048 19.192 21.147C18.437 21.248 17.436 21.25 16 21.25H15C13.565 21.25 12.564 21.248 11.808 21.147C11.075 21.048 10.686 20.867 10.409 20.591C10.166 20.347 9.99896 20.019 9.89396 19.453C9.78596 18.864 9.75796 18.089 9.75196 16.996C9.75144 16.8975 9.73152 16.8001 9.69334 16.7093C9.65517 16.6185 9.59948 16.5361 9.52947 16.4668C9.45945 16.3976 9.37648 16.3428 9.28528 16.3056C9.19409 16.2684 9.09646 16.2495 8.99796 16.25C8.89947 16.2505 8.80205 16.2704 8.71126 16.3086C8.62046 16.3468 8.53808 16.4025 8.46881 16.4725C8.39953 16.5425 8.34473 16.6255 8.30752 16.7167C8.27032 16.8079 8.25144 16.9055 8.25196 17.004C8.25796 18.086 8.28396 18.987 8.41896 19.724C8.55896 20.482 8.82396 21.127 9.34896 21.652C9.94996 22.254 10.709 22.512 11.609 22.634C12.475 22.75 13.578 22.75 14.945 22.75H16.055C17.423 22.75 18.525 22.75 19.392 22.634C20.292 22.512 21.05 22.254 21.652 21.652C22.254 21.05 22.512 20.292 22.634 19.392C22.75 18.525 22.75 17.422 22.75 16.055V7.945C22.75 6.578 22.75 5.475 22.634 4.608C22.513 3.708 22.254 2.95 21.652 2.348C21.05 1.746 20.292 1.488 19.392 1.367C18.525 1.25 17.422 1.25 16.055 1.25H14.945Z"
+              fill="#FF3838" />
+            <path
+              d="M15.0001 11.25C15.199 11.25 15.3897 11.329 15.5304 11.4697C15.6711 11.6103 15.7501 11.8011 15.7501 12C15.7501 12.1989 15.6711 12.3897 15.5304 12.5303C15.3897 12.671 15.199 12.75 15.0001 12.75H4.02707L5.98807 14.43C6.13924 14.5594 6.23281 14.7436 6.24819 14.942C6.26357 15.1404 6.19949 15.3368 6.07007 15.488C5.94064 15.6392 5.75647 15.7327 5.55805 15.7481C5.35964 15.7635 5.16324 15.6994 5.01207 15.57L1.51207 12.57C1.42973 12.4996 1.36363 12.4122 1.31831 12.3138C1.27298 12.2154 1.24951 12.1083 1.24951 12C1.24951 11.8917 1.27298 11.7846 1.31831 11.6862C1.36363 11.5878 1.42973 11.5004 1.51207 11.43L5.01207 8.43C5.08692 8.36591 5.17367 8.3172 5.26735 8.28664C5.36103 8.25607 5.45981 8.24426 5.55805 8.25188C5.6563 8.25949 5.75208 8.28638 5.83993 8.33101C5.92778 8.37565 6.00598 8.43714 6.07007 8.512C6.13415 8.58685 6.18287 8.67359 6.21343 8.76727C6.24399 8.86095 6.2558 8.95973 6.24819 9.05798C6.24057 9.15622 6.21368 9.25201 6.16905 9.33986C6.12442 9.42771 6.06292 9.50591 5.98807 9.57L4.02807 11.25H15.0001Z"
+              fill="#FF3838" />
+          </svg>
+
+          <span class="ml-3 text-[#FF3838]">Sair do Môdulo</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="w-full mt-16">
+    <div class="flex max-w-6xl flex-col my-0 mx-auto px-8 items-start justify-start">
+
+      <div class="flex w-full items-center justify-between mt-11">
+        <span class="text-[#7A7A7A]">Produtos cadastrados:</span>
+
+        <div class="flex items-center">
+
+          <div class="flex items-center">
+            <div class="w-6 h-6 bg-[#EE43B4] rounded-full">
+            </div>
+            <span class="ml-3">Para Doação</span>
+          </div>
+
+          <div class="flex items-center ml-4">
+            <div class="w-6 h-6 bg-[#417453] rounded-full">
+            </div>
+            <span class="ml-3">Para Troca</span>
+          </div>
+
+          <div
+            onclick="window.location.replace('/cadastrar_produto')"
+            class="flex ml-4 cursor-pointer items-center justify-center py-2 px-4 rounded-md bg-[#417453] hover:bg-[#30573e]">
+            <span class="text-white">Cadastrar Produto</span>
+          </div>
+        </div>
+
+
+
+      </div>
+      <!-- Tabela feita com tailwind com as colunas Id, tipo do item, item cadastrado, situação rendimento -->
+      <div class="mt-8 w-full">
+        <table class="w-full mb-7">
+          <thead class="bg-[#417453]">
+            <tr>
+              <th scope="col" class="px-6 py-3 w-[10%] text-center text-white font-regular">
+                Id</th>
+              <th scope="col" class="px-6 py-3 w-[7rem] text-center text-white font-regular">
+                Tipo</th>
+              <th scope="col" class="px-6 py-3 text-left text-white font-regular">
+                Categoria</th>
+              <th scope="col" class="px-6 py-3 w-[40%] text-left text-white font-regular">
+                Nome
+              </th>
+              <th scope="col" class="px-6 py-3 text-center text-white font-regular">
+                Quantidade</th>
+            </tr>
+          </thead>
+          <tbody tableBody class="bg-white ">
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+<script defer>
+  let tokenUser = {};
+  let userInfo = {};
+  let count = 0;
+
+  init();
+
+  function init() {
+    count++;
+
+    const userToken = JSON.parse(localStorage.getItem('userToken'));
+    const todosAcessos = document.querySelectorAll('[todos_acessos]');
+
+    if (userToken?.token && count === 2) {
+      getUserLogged(userToken.token);
+    } else {
+      console.log('Não há usuário logado', count);
+      // window.location.replace('/menu');
+    }
+
+    // Função para pegar o usuário logado
+    async function getUserLogged(token) {
+      try {
+        const response = await fetch(`/api/userInfo?token=${token}`);
+        const data = await response.json();
+
+        if (data.status === 200) {
+          userInfo = data.user;
+          getItensCadastrados();
+          
+          console.log("nivel de acesso", data.user.nivel_acesso);
+
+          if (data.user.nivel_acesso !== "funcionario") {
+            window.location.replace('/menu');
+            alert('Erro:Você não tem acesso a essa página');
+            return
+          }
+
+          setUserInfo();
+        } else {
+          console.log('Não há usuário logado');
+          // window.location.replace('/menu');
+        }
+
+        return data;
+      } catch (error) {
+        alert('Erro ao buscar usuário logado');
+      }
+    }
+
+    // Função para setar as informações do usuário logado
+    function setUserInfo() {
+      const nomeUsuario = document.querySelector('[nome_usuario]');
+      const creditosUsuario = document.querySelector('[creditos_usuario]');
+
+      nomeUsuario.innerHTML = userInfo.nome;
+      creditosUsuario.innerHTML = `${userInfo.creditos} Ecoins`;
+
+    }
+  }
+
+  // Função para sair do módulo
+  function backModule() {
+    window.location.replace('/menu');
+  }
+
+  // Função para pegar itens cadastrados
+  async function getItensCadastrados() {
+    try {
+      const response = await fetch(`/api/pegarTodosProdutos`);
+      const data = await response.json();
+
+      console.warn("Data =>", JSON.stringify(data));
+
+      if (data.itens) {
+          const tableBody = document.querySelector('[tableBody]');
+
+          data.itens.forEach(item => {
+
+            const row = document.createElement('tr');
+            row.classList.add('border', 'border-[#D9D9D9]');
+
+            const idCell = document.createElement('td');
+            idCell.classList.add('px-6', 'py-4');
+            idCell.innerHTML = `<div class="text-[#7A7A7A]">#${item.id}</div>`;
+            row.appendChild(idCell);
+
+            const tipoCell = document.createElement('td');
+            tipoCell.classList.add('px-6', 'py-4', 'w-full', 'flex', 'items-center', 'justify-center');
+
+              // # Tipos de itens
+              // # 1 - Troca
+              // # 2 - Venda
+              // # 3 - Doação
+            if (item.tipo === 1) {
+              tipoCell.innerHTML = `<div class="w-6 h-6 bg-[#417453] rounded-full"></div>`;
+            } else if (item.tipo === 2) {
+              tipoCell.innerHTML = `<div class="w-6 h-6 bg-[#F58220] rounded-full"></div>`;
+            } else {
+              tipoCell.innerHTML = `<div class="w-6 h-6 bg-[#EE43B4] rounded-full"></div>`;
+            }
+            row.appendChild(tipoCell);
+
+            const categoriaCell = document.createElement('td');
+            categoriaCell.classList.add('px-6', 'py-4');
+            categoriaCell.innerHTML = `<div class="text-[#7A7A7A]">${item.categoria}</div>`;
+            row.appendChild(categoriaCell);
+            
+            const nomeCell = document.createElement('td');
+            nomeCell.classList.add('px-6', 'py-4');
+            nomeCell.innerHTML = `<div class="text-[#7A7A7A]">${item.nome_item}</div>`;
+            row.appendChild(nomeCell);
+
+            const quantidadeCell = document.createElement('td');
+            quantidadeCell.classList.add('px-6', 'py-4', 'w-full', 'flex', 'items-center', 'justify-center');
+            quantidadeCell.innerHTML = `<div class="text-[#7A7A7A]">${item.quantidade}</div>`;
+            row.appendChild(quantidadeCell);
+
+            tableBody.appendChild(row);
+          });
+        }
+
+    } catch (error) {
+      console.error(error);
+      alert('Erro ao buscar itens cadastrados');
+    }
+  }
+
+</script>
+{% endblock %}
